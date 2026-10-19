@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karya - Sign In</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-body">
+
+  <header class="auth-header">
+    <a href="index.html">
+      <img src="logo.png" alt="Karya Logo" class="brand-logo" />
+    </a>
+  </header>
+
+  <main class="auth-container">
+    <section class="step-card active" style="width: 100%;">
+      <div class="auth-split">
+        <div class="auth-form-side">
+          <h2>Welcome Back!</h2>
+          
+          <button class="btn-google" onclick="window.location.href='index.html'">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.95H1.2v3.15C3.18 21.28 7.26 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.25c-.25-.72-.38-1.49-.38-2.25s.13-1.53.38-2.25V6.6H1.2C.44 8.14 0 9.87 0 12s.44 3.86 1.2 5.4l4.08-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.26 0 3.18 2.72 1.2 6.6l4.08 3.15c.95-2.84 3.6-4.95 6.72-4.95z"/></svg>
+            Continue with Google
+          </button>
+
+          <div class="divider">
+            <span>or use email</span>
+          </div>
+
+          <form onsubmit="event.preventDefault(); window.location.href='index.html';">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="" required />
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" placeholder="" required />
+              <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+            <div class="checkbox-group">
+              <input type="checkbox" id="terms-in" required />
+              <label for="terms-in">I agree to the Terms of Use and Privacy Policy.</label>
+            </div>
+            <button type="submit" class="btn-primary full">Log In</button>
+            <p class="auth-foot">Don't have an account? <a href="signup.html">Sign up</a></p>
+          </form>
+        </div>
+        <div class="auth-image-side">
+          <div class="union-mask-wrapper">
+            <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=800&q=80" alt="Sign In Image" class="union-img" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SVG Clip-Path -->
+  <svg width="0" height="0" style="position:absolute;">
+    <defs>
+      <clipPath id="figma-union-clip" clipPathUnits="objectBoundingBox">
+        <path d="M 0.22,0 C 0.12,0 0.12,0 0.12,0.08 V 0.16 H 0.1 C 0,0.16 0,0.16 0,0.25 V 0.92 C 0,1 0,1 0.1,1 H 0.78 C 0.88,1 0.88,1 0.88,0.92 V 0.84 H 0.90 C 1,0.84 1,0.84 1,0.75 V 0.08 C 1,0 1,0 0.88,0 Z" />
+      </clipPath>
+    </defs>
+  </svg>
+
+</body>
+</html>
