@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karya - Dashboard Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dashboard-body">
+
+  <!-- Top Navbar -->
+  <header class="top-nav">
+    <a href="index.html">
+      <img src="logo.png" alt="Karya Logo" class="brand-logo" />
+    </a>
+    <div class="nav-right">
+      <a href="#" class="nav-link">About Us</a>
+      <a href="#" class="nav-link">Support</a>
+      <span class="bell-icon">🔔</span>
+      <div class="user-profile">
+        <img src="https://i.pravatar.cc/100?img=33" alt="John Doe" />
+        <span>John Doe ▾</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <a href="index.html" class="side-item active">🏠 Home</a>
+      <a href="exploreprojects.html" class="side-item">🔍 Explore projects</a>
+      <a href="applications.html" class="side-item">📑 Applications</a>
+      <a href="#" class="side-item">💼 Workspace</a>
+      <a href="#" class="side-item">📁 Portfolio</a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dash-content">
+      <div class="dash-header">
+        <div>
+          <h1>Hello! John Doe</h1>
+          <p class="sub">Here's progress and what you can do next</p>
+        </div>
+        <div class="dash-actions">
+          <button class="btn-outline-gold">Upgrade to Karya+</button>
+          <button class="btn-outline-blue">🔍 Explore Projects</button>
+        </div>
+      </div>
+
+      <!-- Stat Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-head">Active project <span>📁</span></div>
+          <div class="stat-num">1</div>
+          <small>Next task due Monday</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-head">Applications <span>📋</span></div>
+          <div class="stat-num">1</div>
+          <small>Update last week</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-head">Verified Skills <span>✔️</span></div>
+          <div class="stat-num">3</div>
+          <small>+1 this week</small>
+        </div>
+        <div class="stat-card">
+          <div class="stat-head">Task Completed <span>👁️</span></div>
+          <div class="stat-num">2</div>
+        </div>
+      </div>
+
+      <!-- Bottom Layout Split -->
+      <div class="content-split">
+        <!-- Progress Main Card -->
+        <div class="card-box progress-card">
+          <div class="flex-between">
+            <span class="badge-blue">IN PROGRESS</span>
+            <span class="percent-text">25%</span>
+          </div>
+          <h2 class="mt-10">Wireframe</h2>
+          <p class="sub">Web Dev & UI/UX &bull; Mentor: Ana Rivera</p>
+          
+          <div class="progress-bar-bg mt-15">
+            <div class="progress-bar-fill" style="width: 25%;"></div>
+          </div>
+          <small class="sub block mt-5">2 of 8 tasks complete</small>
+
+          <div class="task-banner mt-20">
+            <div class="task-info">
+              <span class="icon-box">📋</span>
+              <div>
+                <small class="sub block">NEXT TASK &bull; DUE OCT 2</small>
+                <strong>Synthesize interview themes</strong>
+              </div>
+            </div>
+            <button class="btn-open-workspace">Open workspace</button>
+          </div>
+        </div>
+
+        <!-- Weekly Schedule Sidebar Widget -->
+        <div class="card-box schedule-card">
+          <!-- Judul 'This Week' di dalam Blok Biru -->
+          <div class="schedule-header">
+            <h3>This Week</h3>
+          </div>
+          <div class="schedule-list">
+            <div class="sched-item">
+              <span class="day-tag gold">TODAY</span>
+              <div>
+                <strong>Mentor Review</strong>
+                <small class="block sub">03:30 PM</small>
+              </div>
+            </div>
+            <div class="sched-item">
+              <span class="day-tag green">SAT</span>
+              <div>
+                <strong>Task Deadline</strong>
+                <small class="block sub">11:59 PM</small>
+              </div>
+            </div>
+            <div class="sched-item">
+              <span class="day-tag green">WED</span>
+              <div>
+                <strong>Zoom</strong>
+                <small class="block sub">08:00 AM</small>
+              </div>
+            </div>
+            <div class="sched-item">
+              <span class="day-tag gray">MON</span>
+              <div>
+                <strong>Task 2</strong>
+                <small class="block sub">07:30 AM</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+</html>
