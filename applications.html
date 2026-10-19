@@ -8,483 +8,113 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <style>
-        /* RESET & GENERAL STYLES */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        body {
-            background-color: #f8fafc;
-            color: #0f172a;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* HEADER / NAVBAR */
-        .top-navbar {
-            height: 70px;
-            background-color: #ffffff;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 32px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-img {
-            height: 38px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .nav-item {
-            text-decoration: none;
-            color: #475569;
-            font-size: 14px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .nav-item:hover {
-            color: #1e293b;
-        }
-
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            padding-left: 8px;
-        }
-
-        .avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #334155;
-            font-size: 14px;
-        }
-
-        .user-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #1e293b;
-        }
-
-        /* MAIN LAYOUT (SIDEBAR + CONTENT) */
-        .layout-container {
-            display: flex;
-            flex: 1;
-        }
-
-        /* SIDEBAR */
-        .sidebar {
-            width: 240px;
-            background-color: #ffffff;
-            border-right: 1px solid #e2e8f0;
-            padding: 24px 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .sidebar-menu {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            text-decoration: none;
-            color: #64748b;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 10px;
-            transition: all 0.2s;
-        }
-
-        .sidebar-menu:hover {
-            background-color: #f1f5f9;
-            color: #1e293b;
-        }
-
-        .sidebar-menu.active {
-            background-color: #e0e7ff;
-            color: #2563eb;
-        }
-
-        .menu-icon {
-            font-size: 18px;
-        }
-
-        /* MAIN CONTENT AREA */
-        .main-content {
-            flex: 1;
-            padding: 40px 48px;
-            max-width: 1100px;
-        }
-
-        .page-header h1 {
-            font-size: 28px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 6px;
-        }
-
-        .page-header p {
-            font-size: 14px;
-            color: #64748b;
-            margin-bottom: 28px;
-        }
-
-        /* STATS SUMMARY CARDS */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 36px;
-        }
-
-        .stat-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-
-        .stat-card.active {
-            background-color: #eff6ff;
-            border-color: #3b82f6;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            font-weight: 600;
-            color: #334155;
-        }
-
-        .stat-card.active .stat-label {
-            color: #1d4ed8;
-        }
-
-        .stat-value {
-            font-size: 20px;
-            font-weight: 800;
-            color: #0f172a;
-        }
-
-        /* SECTION TITLE */
-        .section-header h2 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 4px;
-        }
-
-        .section-header p {
-            font-size: 13px;
-            color: #64748b;
-            margin-bottom: 20px;
-        }
-
-        /* APPLICATION CARD */
-        .app-card {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        }
-
-        .app-card-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-
-        .app-info-group {
-            display: flex;
-            gap: 16px;
-            align-items: flex-start;
-        }
-
-        .app-icon {
-            width: 44px;
-            height: 44px;
-            background-color: #dcfce7;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #16a34a;
-            font-size: 20px;
-        }
-
-        .app-details h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #0f172a;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .badge-accepted {
-            background-color: #15803d;
-            color: #ffffff;
-            font-size: 11px;
-            font-weight: 600;
-            padding: 3px 10px;
-            border-radius: 12px;
-        }
-
-        .app-subtext {
-            font-size: 13px;
-            color: #64748b;
-            margin-top: 4px;
-        }
-
-        .app-subtext strong {
-            color: #334155;
-        }
-
-        .app-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-primary-blue {
-            background-color: #2563eb;
-            color: #ffffff;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .btn-secondary-light {
-            background-color: #ffffff;
-            color: #1e293b;
-            border: 1px solid #cbd5e1;
-            padding: 10px 18px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* BANNER INSIDE CARD */
-        .app-banner {
-            background-color: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 10px;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 13px;
-            color: #166534;
-        }
-
-        .banner-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .banner-link {
-            color: #15803d;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        /* INFO BOX AT BOTTOM */
-        .info-box {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            padding: 20px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .info-box-left {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-
-        .info-icon {
-            color: #2563eb;
-            font-size: 18px;
-            margin-top: 2px;
-        }
-
-        .info-text h4 {
-            font-size: 14px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 2px;
-        }
-
-        .info-text p {
-            font-size: 12px;
-            color: #64748b;
-        }
-
-        .info-link {
-            font-size: 13px;
-            font-weight: 700;
-            color: #0f172a;
-            text-decoration: none;
-        }
-    </style>
+    
+    <!-- MENGGUNAKAN STYLE.CSS YANG SAMA PERSIS DENGAN INDEX.HTML -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- TOP NAVBAR -->
-    <header class="top-navbar">
-        <div class="logo-container">
-            <!-- Gambar disesuaikan dengan folder IMAGES/KARYA.jpeg -->
-            <img src="IMAGES/KARYA.jpeg" alt="Karya Logo" class="logo-img">
-        </div>
-        <div class="nav-right">
-            <a href="#" class="nav-item">💬 About Us</a>
-            <a href="#" class="nav-item">🎧 Support</a>
-            <div class="user-profile">
-                <div class="avatar">JD</div>
-                <span class="user-name">John Doe ▾</span>
-            </div>
-        </div>
-    </header>
+    <!-- Top Navbar -->
+  <header class="top-nav">
+    <a href="index.html">
+      <img src="logo.png" alt="Karya Logo" class="brand-logo" />
+    </a>
+    <div class="nav-right">
+      <a href="#" class="nav-link">About Us</a>
+      <a href="#" class="nav-link">Support</a>
+      <span class="bell-icon">🔔</span>
+      <div class="user-profile">
+        <img src="https://i.pravatar.cc/100?img=33" alt="John Doe" />
+        <span>John Doe ▾</span>
+      </div>
+    </div>
+  </header>
 
     <!-- MAIN LAYOUT -->
-    <div class="layout-container">
+    <div class="dashboard-layout">
         
         <!-- SIDEBAR -->
         <aside class="sidebar">
-            <a href="#" class="sidebar-menu">
-                <span class="menu-icon">🏠</span> Home
-            </a>
-            <a href="#" class="sidebar-menu">
-                <span class="menu-icon">🔍</span> Explore projects
-            </a>
-            <a href="#" class="sidebar-menu active">
-                <span class="menu-icon">📋</span> Applications
-            </a>
-            <a href="#" class="sidebar-menu">
-                <span class="menu-icon">💼</span> Workspace
-            </a>
-            <a href="#" class="sidebar-menu">
-                <span class="menu-icon">🧰</span> Portfolio
-            </a>
+            <a href="index.html" class="side-item">🏠 Home</a>
+            <a href="exploreprojects.html" class="side-item">🔍 Explore projects</a>
+            <a href="applications.html" class="side-item active">📑 Applications</a>
+            <a href="#" class="side-item">💼 Workspace</a>
+            <a href="#" class="side-item">📁 Portfolio</a>
         </aside>
 
         <!-- MAIN CONTENT AREA -->
-        <main class="main-content">
+        <main class="dash-content">
             
-            <div class="page-header">
-                <h1>Applications</h1>
-                <p>Track decisions, next steps, and feedback in one place.</p>
+            <div class="page-header" style="margin-bottom: 30px;">
+                <h1 style="font-size: 28px; font-weight: 800; color: #0f172a; margin-bottom: 6px;">Applications</h1>
+                <p style="font-size: 14px; color: #64748b;">Track decisions, next steps, and feedback in one place.</p>
             </div>
 
             <!-- STATS GRID -->
-            <div class="stats-grid">
-                <div class="stat-card active">
-                    <span class="stat-label">All applications</span>
-                    <span class="stat-value">1</span>
+            <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px;">
+                <div class="stat-card active" style="background: #fff; border: 1px solid #3b82f6; border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span class="stat-label" style="font-size: 14px; font-weight: 600; color: #1d4ed8;">All applications</span>
+                    <span class="stat-value" style="font-size: 20px; font-weight: 800; color: #0f172a;">1</span>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-label">Pending</span>
-                    <span class="stat-value">0</span>
+                <div class="stat-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span class="stat-label" style="font-size: 14px; font-weight: 600; color: #334155;">Pending</span>
+                    <span class="stat-value" style="font-size: 20px; font-weight: 800; color: #0f172a;">0</span>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-label">Accepted</span>
-                    <span class="stat-value">1</span>
+                <div class="stat-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span class="stat-label" style="font-size: 14px; font-weight: 600; color: #334155;">Accepted</span>
+                    <span class="stat-value" style="font-size: 20px; font-weight: 800; color: #0f172a;">1</span>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-label">Not selected</span>
-                    <span class="stat-value">0</span>
+                <div class="stat-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span class="stat-label" style="font-size: 14px; font-weight: 600; color: #334155;">Not selected</span>
+                    <span class="stat-value" style="font-size: 20px; font-weight: 800; color: #0f172a;">0</span>
                 </div>
             </div>
 
             <!-- RECENT APPLICATIONS SECTION -->
-            <div class="section-header">
-                <h2>Recent applications</h2>
-                <p>Status examples show what happens after you apply.</p>
+            <div class="section-header" style="margin-bottom: 20px;">
+                <h2 style="font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 4px;">Recent applications</h2>
+                <p style="font-size: 13px; color: #64748b;">Status examples show what happens after you apply.</p>
             </div>
 
             <!-- APPLICATION ITEM CARD -->
-            <div class="app-card">
-                <div class="app-card-top">
-                    <div class="app-info-group">
-                        <div class="app-icon">✓</div>
+            <div class="app-card" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                <div class="app-card-top" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                    <div class="app-info-group" style="display: flex; gap: 16px; align-items: flex-start;">
+                        <div class="app-icon" style="width: 44px; height: 44px; background-color: #dcfce7; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #16a34a; font-size: 20px;">✓</div>
                         <div class="app-details">
-                            <h3>Map a food bank volunteer journey <span class="badge-accepted">Accepted</span></h3>
-                            <p class="app-subtext">Harbor Community Food Hub · Applied Sep 28</p>
-                            <p class="app-subtext"><strong>Kickoff is scheduled for Oct 1 at 3:30 PM</strong></p>
+                            <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 10px;">
+                                Map a food bank volunteer journey 
+                                <span class="badge-accepted" style="background-color: #15803d; color: #ffffff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px;">Accepted</span>
+                            </h3>
+                            <p class="app-subtext" style="font-size: 13px; color: #64748b; margin-top: 4px;">Harbor Community Food Hub · Applied Sep 28</p>
+                            <p class="app-subtext" style="font-size: 13px; color: #64748b; margin-top: 4px;"><strong style="color: #334155;">Kickoff is scheduled for Oct 1 at 3:30 PM</strong></p>
                         </div>
                     </div>
-                    <div class="app-actions">
-                        <button class="btn-primary-blue">Open workspace</button>
-                        <button class="btn-secondary-light">View details</button>
+                    <div class="app-actions" style="display: flex; gap: 10px;">
+                        <button class="btn-primary-blue" style="background-color: #2563eb; color: #ffffff; border: none; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">Open workspace</button>
+                        <button class="btn-secondary-light" style="background-color: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">View details</button>
                     </div>
                 </div>
 
                 <!-- BANNER INSIDE CARD -->
-                <div class="app-banner">
-                    <div class="banner-left">
+                <div class="app-banner" style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: #166534;">
+                    <div class="banner-left" style="display: flex; align-items: center; gap: 8px;">
                         <span>📅</span> You're in! Review the brief and introduce yourself before kickoff.
                     </div>
-                    <a href="#" class="banner-link">View kickoff checklist →</a>
+                    <a href="#" class="banner-link" style="color: #15803d; font-weight: 700; text-decoration: none;">View kickoff checklist →</a>
                 </div>
             </div>
 
             <!-- INFO BOX AT BOTTOM -->
-            <div class="info-box">
-                <div class="info-box-left">
-                    <span class="info-icon">ⓘ</span>
+            <div class="info-box" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;">
+                <div class="info-box-left" style="display: flex; align-items: flex-start; gap: 12px;">
+                    <span class="info-icon" style="color: #2563eb; font-size: 18px; margin-top: 2px;">ⓘ</span>
                     <div class="info-text">
-                        <h4>What happens while an application is pending?</h4>
-                        <p>Partners review your profile and answers, then may send one follow-up question. You'll receive a notification as soon as the status changes.</p>
+                        <h4 style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 2px;">What happens while an application is pending?</h4>
+                        <p style="font-size: 12px; color: #64748b;">Partners review your profile and answers, then may send one follow-up question. You'll receive a notification as soon as the status changes.</p>
                     </div>
                 </div>
-                <a href="#" class="info-link">Application tips</a>
+                <a href="#" class="info-link" style="font-size: 13px; font-weight: 700; color: #0f172a; text-decoration: none;">Application tips</a>
             </div>
 
         </main>
