@@ -1,778 +1,2092 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Explore Projects - Karya</title>
-<!-- Google Font: Plus Jakarta Sans -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<!-- MENGGUNAKAN STYLE.CSS UTAMA YANG KONSISTEN -->
-<link rel="stylesheet" href="style.css">
+<title>Karya | Explore Projects</title>
+<div class="logo">
+    <img src="logo.png" alt="Karya Logo">
+</div>
 
 <style>
-/* STABILITAS SCROLLBAR & SIDEBAR STICKY */
-html {
-  overflow-y: scroll;
-}
-
-.sidebar {
-  position: sticky !important;
-  top: 70px !important;
-  align-self: flex-start !important;
-  height: calc(100vh - 70px) !important;
-  overflow-y: auto !important;
-}
-
-/* TAMBAHAN SPESIFIK HALAMAN EXPLORE PROJECTS */
 :root {
-  --blue: #3155df;
-  --navy: #10105c;
-  --light-blue: #dceaff;
-  --border: #e5e7eb;
-  --muted: #64748b;
-  --green: #dcfce7;
+    --blue: #3038d8;
+    --blue2: #3457df;
+    --pale: #e7efff;
+    --line: #cbd1dc;
+    --muted: #707583;
+    --ink: #20232a;
+    --bg: #ffffff;
 }
 
-button, input, select {
-  font: inherit;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-size: 14px;
+}
+
+button, input, select, textarea {
+    font: inherit;
 }
 
 button {
-  cursor: pointer;
+    cursor: pointer;
 }
 
-.saved-button,
-.sort,
-.search-box {
-  background: white;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
+.app {
+    min-height: 100vh;
+    display: flex;
 }
 
-.saved-button {
-  padding: 12px 18px;
-  white-space: nowrap;
-  font-weight: 600;
-  color: #1e293b;
+.sidebar {
+    width: 224px;
+    border-right: 1px solid var(--line);
+    padding: 24px 15px 14px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    min-height: 100vh;
+    background: #fff;
 }
 
-.search-row {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 24px;
+/* LOGO IMAGE */
+.logo {
+    display: flex;
+    align-items: center;
+    width: 145px;
+    height: 45px;
+    margin: 0 0 14px;
+    padding: 4px 6px;
+    overflow: hidden;
 }
 
-.search-box {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  gap: 10px;
-  padding: 0 16px;
-  height: 44px;
+.logo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: left center;
 }
 
-.search-box input {
-  flex: 1;
-  min-width: 0;
-  border: none;
-  outline: none;
-  font-size: 0.95rem;
+.group-label {
+    color: #c0c4cd;
+    margin: 0 0 8px;
+    font-size: 13px;
 }
 
-.sort {
-  width: 190px;
-  padding: 0 12px;
-  height: 44px;
-  color: #334155;
-  font-size: 0.9rem;
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
 
-/* Filter panel and project cards */
-.content-grid {
-  display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
-  gap: 20px;
-  align-items: start;
+.nav button {
+    border: 0;
+    background: transparent;
+    text-align: left;
+    padding: 12px 11px;
+    border-radius: 9px;
+    color: #777d89;
+    display: flex;
+    gap: 11px;
+    align-items: center;
 }
 
-.filters {
-  padding: 20px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+.nav button.active {
+    background: #dfebff;
+    color: #263bd8;
 }
 
-.filter-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
+.nav button:hover {
+    background: #f2f5fb;
 }
 
-.filter-heading h2 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: #0f172a;
+.nav .ico {
+    width: 17px;
+    text-align: center;
+    font-size: 17px;
 }
 
-.clear {
-  border: none;
-  background: none;
-  color: #2563eb;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
+.side-bottom {
+    margin-top: auto;
 }
 
-.filter-group {
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid var(--border);
+.user {
+    border-top: 1px solid var(--line);
+    margin: 12px 10px 0;
+    padding-top: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
 }
 
-.filter-group h3 {
-  font-size: 13px;
-  font-weight: 700;
-  margin: 0 0 10px;
-  color: #1e293b;
+.avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #e7e9ed;
+    display: grid;
+    place-items: center;
+    font-size: 16px;
 }
 
-.check-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 8px 0;
-  color: var(--muted);
-  font-size: 13px;
+.user small {
+    display: block;
+    color: var(--muted);
+    margin-top: 3px;
 }
 
-.check-row input {
-  accent-color: #2563eb;
-  width: 16px;
-  height: 16px;
+.logout {
+    margin-left: auto;
+    color: #f07878;
 }
 
-.apply {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: #2563eb;
-  color: white;
-  font-weight: 700;
-  font-size: 13px;
-}
-
-.results-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: #0f172a;
-}
-
-.result-meta {
-  color: var(--muted);
-  text-align: right;
-}
-
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.project-card {
-  display: flex;
-  flex-direction: column;
-  min-height: 230px;
-  padding: 20px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  background: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-}
-
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.badge {
-  padding: 4px 10px;
-  border-radius: 20px;
-  background: #dcfce7;
-  color: #166534;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.bookmark {
-  border: none;
-  background: none;
-  color: #64748b;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.bookmark.saved {
-  color: #2563eb;
-}
-
-.project-card h2 {
-  margin: 0 0 6px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #0f172a;
-  line-height: 1.3;
-}
-
-.organization,
-.project-type {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.organization {
-  margin: 0 0 6px;
-}
-
-.project-type {
-  margin-bottom: 12px;
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 16px;
-}
-
-.tag {
-  padding: 4px 10px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: #f8fafc;
-  font-size: 12px;
-  color: #334155;
-}
-
-.card-meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: auto;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.view-project {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  color: #0f172a;
-  font-weight: 700;
-  font-size: 13px;
-}
-
-.pagination {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 24px;
-}
-
-.showing {
-  margin-right: auto;
-  color: var(--muted);
-  font-size: 13px;
+/* MAIN CONTENT */
+main {
+    flex: 1;
+    min-width: 0;
+    padding: 54px 4vw 48px;
 }
 
 .page {
-  width: 36px;
-  height: 36px;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  background: #fff;
-  color: #334155;
-  font-weight: 600;
-  cursor: pointer;
+    display: none;
+    max-width: 1320px;
+    margin: 0 auto;
 }
 
 .page.active {
-  background: #2563eb;
-  border-color: #2563eb;
-  color: white;
+    display: block;
 }
 
-.page:disabled {
-  opacity: .4;
-  cursor: default;
+.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.page h1 {
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 0 0 6px;
+    color: #08090b;
+    letter-spacing: -.6px;
+}
+
+.sub {
+    color: var(--muted);
+    margin: 0;
+}
+
+.btn {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: #17191d;
+}
+
+.btn.primary {
+    background: var(--blue2);
+    border-color: var(--blue2);
+    color: #fff;
+    font-weight: 650;
+}
+
+.btn.primary:hover {
+    background: #242ac1;
+}
+
+.btn:hover {
+    filter: brightness(.98);
+}
+
+/* SEARCH AND SORT */
+.search-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 180px;
+    gap: 12px;
+    margin-bottom: 17px;
+}
+
+.searchbox {
+    border: 1px solid #aeb5c2;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 13px;
+    min-width: 0;
+}
+
+.searchbox input {
+    border: 0;
+    outline: 0;
+    width: 100%;
+    min-width: 0;
+    padding: 13px 0;
+}
+
+.searchbox span {
+    color: var(--muted);
+    font-size: 17px;
+    flex-shrink: 0;
+}
+
+.search-clear {
+    border: 0;
+    background: transparent;
+    color: #747b88;
+    font-size: 22px;
+    line-height: 1;
+    padding: 2px 4px;
+    flex-shrink: 0;
+}
+
+.search-clear:hover {
+    color: var(--blue);
+}
+
+.search-row select {
+    border: 1px solid #aeb5c2;
+    border-radius: 8px;
+    padding: 0 14px;
+    background: white;
+    min-width: 0;
+}
+
+/* FILTER PANEL */
+.catalog {
+    display: grid;
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.filter-panel,
+.card,
+.panel {
+    border: 1px solid var(--line);
+    border-radius: 13px;
+    background: #fff;
+    box-shadow: 0 2px 5px #0000000a;
+}
+
+.filter-panel {
+    padding: 13px 12px;
+    max-width: 190px;
+}
+
+.filter-panel.collapsed .filter-content,
+.filter-content[hidden] {
+    display: none;
+}
+
+.filter-top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.filter-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    border: 0;
+    background: none;
+    padding: 2px 4px;
+    text-align: left;
+}
+
+.filter-toggle h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+#filter-chevron {
+    font-size: 20px;
+    color: #646b78;
+}
+
+.text-btn {
+    border: 0;
+    background: none;
+    color: var(--blue2);
+    padding: 0;
+    font-size: 12px;
+}
+
+.filter-group {
+    border-bottom: 1px solid var(--line);
+    padding: 0 0 11px;
+    margin-bottom: 12px;
+}
+
+.filter-group:last-of-type {
+    border: 0;
+    margin-bottom: 4px;
+}
+
+.filter-group h4 {
+    font-size: 12px;
+    margin: 0 0 9px;
+}
+
+.check {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #747b88;
+    font-size: 12px;
+    margin: 6px 0;
+}
+
+.check input {
+    accent-color: var(--blue2);
+    width: 15px;
+    height: 15px;
+    margin: 0;
+}
+
+.apply-filter {
+    width: 100%;
+    padding: 10px 7px;
+    font-size: 12px;
+}
+
+/* PROJECT RESULTS */
+.results-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 2px 0 12px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.results-head strong {
+    font-size: 14px;
+    color: #20232a;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.project-card {
+    padding: 17px 16px 14px;
+    min-height: 252px;
+    display: flex;
+    flex-direction: column;
+}
+
+.badge {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 650;
+    border-radius: 20px;
+    padding: 5px 10px;
+    background: #e8ffb9;
+    color: #1c37d6;
+    align-self: flex-start;
+}
+
+.badge.yellow {
+    background: #ffeda0;
+}
+
+.badge.blue {
+    background: #dce9ff;
+}
+
+.badge.pink {
+    background: #ffc8c9;
+}
+
+.bookmark {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid #656a75;
+    border-radius: 2px;
+    background: #fff;
+    color: transparent;
+    font-size: 0;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.bookmark.saved {
+    background: #3038d8;
+    border-color: #3038d8;
+    box-shadow: inset 0 0 0 4px #fff;
+}
+
+.card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.project-card h3 {
+    font-size: 16px;
+    line-height: 1.25;
+    margin: 9px 0 8px;
+    color: #111;
+}
+
+.org {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.category {
+    font-size: 12px;
+    color: #6e7380;
+    margin-bottom: 9px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tag {
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 5px 8px;
+    font-size: 12px;
+    background: #f9fafc;
+}
+
+.project-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.card-link {
+    border-top: 1px solid var(--line);
+    margin-top: 8px;
+    padding-top: 9px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--blue);
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    margin-top: 16px;
+    align-items: center;
+}
+
+.pagination button {
+    border: 1px solid var(--blue);
+    background: #e0ebff;
+    color: var(--blue);
+    border-radius: 4px;
+    min-width: 35px;
+    height: 35px;
+}
+
+.pagination button.active {
+    background: var(--blue);
+    color: #fff;
+}
+
+.pagination .arrow {
+    border: 0;
+    background: none;
+    font-size: 20px;
+}
+
+.empty {
+    padding: 30px;
+    text-align: center;
+    color: var(--muted);
+    grid-column: 1 / -1;
+}
+
+/* PROJECT DETAILS */
+.detail-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.8fr) minmax(260px, .85fr);
+    gap: 22px;
+}
+
+.breadcrumb {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 20px;
+}
+
+.breadcrumb a {
+    color: var(--blue);
+    text-decoration: none;
+}
+
+.panel {
+    padding: 22px;
+    margin-bottom: 14px;
+}
+
+.project-summary {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.project-summary h2 {
+    font-size: 25px;
+    margin: 10px 0 8px;
+    line-height: 1.25;
+}
+
+.company {
+    color: var(--muted);
+    margin-bottom: 18px;
+}
+
+.stats {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.stat b {
+    display: block;
+    color: #282b32;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+/* SIMPLE BUILDING LOGO */
+.company-icon {
+    width: 62px;
+    height: 62px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex-shrink: 0;
+    padding: 8px;
+}
+
+.building-roof {
+    height: 5px;
+    width: 30px;
+    border: 1.5px solid #7d8491;
+    border-bottom: 0;
+    display: block;
+}
+
+.building-body {
+    height: 29px;
+    width: 30px;
+    border: 1.5px solid #7d8491;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 3px;
+    padding: 4px;
+}
+
+.building-body i {
+    display: block;
+    border: 1px solid #9aa1ad;
+    background: #f1f3f7;
+}
+
+.panel h3 {
+    font-size: 17px;
+    margin: 0 0 16px;
+}
+
+.panel p {
+    line-height: 1.65;
+    margin: 0 0 14px;
+}
+
+.outcome {
+    padding: 13px;
+    border-radius: 8px;
+    background: #f5f6f8;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.two-panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.tick-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tick-list li {
+    display: flex;
+    gap: 10px;
+    line-height: 1.45;
+    margin: 12px 0;
+}
+
+.tick {
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    background: #e5edff;
+    color: #3a5de3;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.right-card h3 {
+    margin-bottom: 16px;
+}
+
+.right-card p {
+    color: var(--muted);
+}
+
+.match-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin: 15px 0 9px;
+}
+
+.match-line strong {
+    color: var(--blue);
+}
+
+.progress {
+    height: 7px;
+    background: #e8eaf0;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+
+.progress span {
+    display: block;
+    width: 94%;
+    height: 100%;
+    background: var(--blue2);
+    border-radius: 8px;
+}
+
+.full {
+    width: 100%;
+}
+
+.center-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 14px !important;
+}
+
+.mentor {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mentor-photo {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #e6e9ef;
+    border: 1px solid #e1e4e9;
+    display: grid;
+    place-items: center;
+}
+
+.mentor small {
+    display: block;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+/* APPLICATION FORM */
+.apply-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(260px, .8fr);
+    gap: 22px;
+}
+
+.form-panel {
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.form-panel h3 {
+    margin: 0 0 7px;
+    font-size: 17px;
+}
+
+.hint {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 18px;
+}
+
+.fit-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+}
+
+.complete {
+    font-size: 11px;
+    color: var(--blue);
+    background: #e1edff;
+    padding: 7px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 15px 0 8px;
+}
+
+.field-value {
+    font-weight: 650;
+}
+
+.form-control {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px;
+    background: #fff;
+    outline-color: var(--blue2);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.5;
+}
+
+.char-count {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 6px;
+}
+
+.availability-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.checklist li {
+    margin: 14px 0;
+    font-size: 12px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.checklist .ok {
+    color: #378b6b;
+    font-size: 17px;
+}
+
+.project-side-title {
+    font-size: 17px;
+    margin: 0 0 14px;
+}
+
+.side-fact {
+    font-size: 12px;
+    color: var(--muted);
+    margin: 12px 0;
+    line-height: 1.45;
+}
+
+.privacy {
+    display: flex;
+    gap: 9px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+    margin: 18px 12px;
+}
+
+.back-btn {
+    display: block;
+    margin: 15px auto 0;
+    border: 0;
+    background: none;
+    font-weight: 650;
+}
+
+.detail-page-head {
+    align-items: center;
+}
+
+.detail-page-head > div {
+    min-width: 0;
+}
+
+.save-action,
+.saved-projects-action {
+    min-width: 165px;
+    transition: background .18s, color .18s, border-color .18s;
+}
+
+.save-action.is-saved,
+.saved-projects-action.is-saved {
+    background: #e3edff;
+    border-color: #3658df;
+    color: #263bd8;
+}
+
+.upload-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 13px;
+    border: 1px dashed #aeb7c7;
+    border-radius: 9px;
+    background: #fafbff;
+    cursor: pointer;
+}
+
+.upload-box:hover {
+    border-color: var(--blue2);
+    background: #f4f7ff;
+}
+
+.upload-box .upload-icon {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: #e6edff;
+    color: var(--blue);
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.upload-box b {
+    display: block;
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+.upload-box small {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.upload-box .btn {
+    margin-left: auto;
+    white-space: nowrap;
+    padding: 9px 12px;
+}
+
+.toast {
+    position: fixed;
+    right: 22px;
+    bottom: 22px;
+    background: #20232a;
+    color: #fff;
+    padding: 12px 17px;
+    border-radius: 9px;
+    box-shadow: 0 5px 20px #0002;
+    display: none;
+    z-index: 10;
+    max-width: calc(100vw - 44px);
+}
+
+@media (max-width: 1100px) {
+    .sidebar {
+        width: 195px;
+    }
+
+    main {
+        padding: 50px 25px;
+    }
+
+    .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-card {
+        min-height: 230px;
+    }
+}
+
+@media (max-width: 760px) {
+    .app {
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: 0;
+        padding: 12px;
+        display: block;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+        width: 125px;
+        height: 38px;
+        margin-bottom: 8px;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .nav button {
+        white-space: nowrap;
+        padding: 10px;
+    }
+
+    .nav .ico {
+        display: none;
+    }
+
+    .group-label,
+    .side-bottom {
+        display: none;
+    }
+
+    main {
+        padding: 26px 15px 36px;
+    }
+
+    .page-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .page h1 {
+        font-size: 26px;
+    }
+
+    .search-row {
+        grid-template-columns: 1fr;
+    }
+
+    .catalog,
+    .detail-layout,
+    .apply-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-panel {
+        order: 0;
+        max-width: none;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .two-panels {
+        grid-template-columns: 1fr;
+    }
+
+    .project-summary h2 {
+        font-size: 21px;
+    }
+
+    .availability-row {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        min-height: 220px;
+    }
+
+    .page-head .btn {
+        align-self: flex-start;
+    }
+
+    .results-head {
+        flex-wrap: wrap;
+    }
 }
 </style>
 </head>
 
 <body>
+<div class="app">
 
-  <!-- Top Navbar -->
-  <header class="top-nav">
-    <a href="index.html">
-      <img src="logo.png" alt="Karya Logo" class="brand-logo" />
-    </a>
-    <div class="nav-right">
-      <a href="#" class="nav-link">About Us</a>
-      <a href="#" class="nav-link">Support</a>
-      <span class="bell-icon">🔔</span>
-      <div class="user-profile">
-        <img src="https://i.pravatar.cc/100?img=33" alt="John Doe" />
-        <span>John Doe ▾</span>
-      </div>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+    <!-- LOGO: image file named logo.png -->
+    <div class="logo">
+        <img src="logo.png" alt="Karya Logo">
     </div>
-  </header>
 
-  <!-- DASHBOARD LAYOUT -->
-  <div class="dashboard-layout">
+    <p class="group-label">Main</p>
 
-    <!-- SIDEBAR (STICKY) -->
-    <aside class="sidebar">
-      <a href="index.html" class="side-item">🏠 Home</a>
-      <a href="exploreprojects.html" class="side-item active">🔍 Explore projects</a>
-      <a href="applications.html" class="side-item">📑 Applications</a>
-      <a href="#" class="side-item">💼 Workspace</a>
-      <a href="#" class="side-item">📁 Portfolio</a>
-    </aside>
+    <nav class="nav">
+        <button onclick="showPage('explore')" title="Home">
+            <span class="ico">⌂</span>Home
+        </button>
 
-    <!-- MAIN CONTENT AREA -->
-    <main class="dash-content">
-      <div class="dash-header">
+        <button class="active" onclick="showPage('explore')">
+            <span class="ico">⌕</span>Explore projects
+        </button>
+
+        <button onclick="showPage('apply')">
+            <span class="ico">▤</span>Applications
+        </button>
+
+        <button onclick="showPage('details')">
+            <span class="ico">◫</span>Workspace
+        </button>
+
+        <button onclick="showPage('details')">
+            <span class="ico">♧</span>Portfolio
+        </button>
+    </nav>
+
+    <p class="group-label" style="margin-top:10px">Communication</p>
+
+    <nav class="nav">
+        <button onclick="notify('Inbox is a demo item.')">
+            <span class="ico">✉</span>Inbox
+        </button>
+
+        <button onclick="notify('Feedback is a demo item.')">
+            <span class="ico">☑</span>Feedback
+        </button>
+    </nav>
+
+    <div class="side-bottom">
+        <nav class="nav">
+            <button onclick="notify('Settings are not connected in this demo.')">
+                <span class="ico">⚙</span>Settings
+            </button>
+
+            <button onclick="notify('Help center is a demo item.')">
+                <span class="ico">ⓘ</span>Help
+            </button>
+        </nav>
+
+        <div class="user">
+            <!-- PROFILE IMAGE PLACEHOLDER -->
+            <div class="avatar">●</div>
+            <div>
+                <b>Full Name</b>
+                <small>JohnDoe@gmail.com</small>
+            </div>
+            <span class="logout">⇥</span>
+        </div>
+    </div>
+</aside>
+
+<main>
+
+<!-- EXPLORE PROJECTS PAGE -->
+<section id="explore" class="page active">
+
+    <div class="page-head">
         <div>
-          <h1 style="font-size: 28px; font-weight: 800; color: #0f172a; margin-bottom: 6px;">Explore projects</h1>
-          <p style="font-size: 14px; color: #64748b; margin: 0;">
-            Find a project that fits your goals, skills, and schedule.
-          </p>
+            <h1>Explore projects</h1>
+            <p class="sub">Find a project that fits your goals, skills, and schedule.</p>
         </div>
 
-        <button class="saved-button" id="savedToggle">
-          🔖 Saved projects · <span id="savedCount">2</span>
+        <button id="saved-projects-btn" class="btn saved-projects-action" onclick="showSaved()">
+            □ &nbsp; Saved projects · <span id="saved-count">0</span>
         </button>
-      </div>
+    </div>
 
-      <!-- Search and sorting -->
-      <div class="search-row">
-        <label class="search-box">
-          <span>🔍</span>
-          <input id="searchInput" type="search" placeholder="Search by project, organization, or skill">
-        </label>
+    <div class="search-row">
+        <div class="searchbox">
+            <span>⌕</span>
+            <input
+                id="search"
+                placeholder="Search by project, organization, or skill"
+                oninput="renderProjects()"
+            >
+            <button
+                type="button"
+                class="search-clear"
+                id="search-clear"
+                aria-label="Clear search"
+                onclick="clearSearch()"
+                hidden
+            >×</button>
+        </div>
 
-        <select class="sort" id="sortSelect" aria-label="Sort projects">
-          <option value="match">Best match</option>
-          <option value="newest">Newest</option>
-          <option value="title">Project name</option>
+        <select id="sort" onchange="renderProjects()">
+            <option value="newest">Newest</option>
+            <option value="match">Best match</option>
         </select>
-      </div>
+    </div>
 
-      <div class="content-grid">
+    <div class="catalog">
 
-        <!-- Filter panel -->
-        <aside class="filters">
-          <div class="filter-heading">
-            <h2>Filters</h2>
-            <button class="clear" id="clearFilters">Clear all</button>
-          </div>
+        <!-- FILTERS -->
+        <aside class="filter-panel collapsed" id="filter-panel">
+            <div class="filter-top">
+                <button
+                    class="filter-toggle"
+                    type="button"
+                    onclick="toggleFilters()"
+                    aria-expanded="false"
+                >
+                    <h3>Filters</h3>
+                    <span id="filter-chevron">⌄</span>
+                </button>
+            </div>
 
-          <div class="filter-group">
-            <h3>Category</h3>
-            <label class="check-row"><input type="checkbox" data-group="category" value="UX & product"> UX &amp; product</label>
-            <label class="check-row"><input type="checkbox" data-group="category" value="Research"> Research</label>
-            <label class="check-row"><input type="checkbox" data-group="category" value="Marketing"> Marketing</label>
-            <label class="check-row"><input type="checkbox" data-group="category" value="Data & tech"> Data &amp; tech</label>
-          </div>
+            <div class="filter-content" id="filter-content" hidden>
 
-          <div class="filter-group">
-            <h3>Skills</h3>
-            <label class="check-row"><input type="checkbox" data-group="skill" value="Figma"> Figma</label>
-            <label class="check-row"><input type="checkbox" data-group="skill" value="User research"> User research</label>
-            <label class="check-row"><input type="checkbox" data-group="skill" value="Content design"> Content design</label>
-            <label class="check-row"><input type="checkbox" data-group="skill" value="Data visualization"> Data visualization</label>
-          </div>
+                <div style="display:flex;justify-content:flex-end;margin:-4px 0 12px">
+                    <button class="text-btn" onclick="clearFilters()">Clear all</button>
+                </div>
 
-          <div class="filter-group">
-            <h3>Duration</h3>
-            <label class="check-row"><input type="checkbox" data-group="duration" value="1-3"> 1–3 weeks</label>
-            <label class="check-row"><input type="checkbox" data-group="duration" value="4-6"> 4–6 weeks</label>
-            <label class="check-row"><input type="checkbox" data-group="duration" value="7+"> 7+ weeks</label>
-          </div>
+                <div class="filter-group">
+                    <h4>Category</h4>
 
-          <div class="filter-group">
-            <h3>Level</h3>
-            <label class="check-row"><input type="checkbox" data-group="level" value="Beginner"> Beginner</label>
-            <label class="check-row"><input type="checkbox" data-group="level" value="Developing"> Developing</label>
-            <label class="check-row"><input type="checkbox" data-group="level" value="Intermediate"> Intermediate</label>
-          </div>
+                    <label class="check">
+                        <input type="checkbox" value="UX & product" class="filter" data-type="category">
+                        UX & product
+                    </label>
 
-          <button class="apply" id="applyFilters">
-            Apply filters · <span id="filterCount">12</span>
-          </button>
+                    <label class="check">
+                        <input type="checkbox" value="Research" class="filter" data-type="category">
+                        Research
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox" value="Marketing" class="filter" data-type="category">
+                        Marketing
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox" value="Data & tech" class="filter" data-type="category">
+                        Data & tech
+                    </label>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Skills</h4>
+
+                    <label class="check">
+                        <input type="checkbox" value="Figma" class="filter" data-type="skills">
+                        Figma
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox" value="User research" class="filter" data-type="skills">
+                        User research
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox" value="Content design" class="filter" data-type="skills">
+                        Content design
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox" value="Data visualization" class="filter" data-type="skills">
+                        Data visualization
+                    </label>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Duration</h4>
+
+                    <label class="check">
+                        <input type="checkbox" value="1–3" class="filter" data-type="duration">
+                        1–3 weeks
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox" value="4–6" class="filter" data-type="duration">
+                        4–6 weeks
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox" value="7+" class="filter" data-type="duration">
+                        7+ weeks
+                    </label>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Level</h4>
+
+                    <label class="check">
+                        <input type="checkbox" value="Beginner" class="filter" data-type="level">
+                        Beginner
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox" value="Developing" class="filter" data-type="level">
+                        Developing
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox" value="Intermediate" class="filter" data-type="level">
+                        Intermediate
+                    </label>
+                </div>
+
+                <button class="btn primary apply-filter" id="apply-filter-btn" onclick="renderProjects()">
+                    Apply filters (9)
+                </button>
+
+                <p
+                    id="selected-filter-count"
+                    class="sub"
+                    style="font-size:11px;text-align:center;margin:8px 0 0"
+                >No filters selected</p>
+            </div>
         </aside>
 
-        <!-- Project results -->
-        <section class="results">
-          <div class="results-top">
-            <strong><span id="projectCount">12</span> projects</strong>
-            <span class="result-meta" id="resultMeta">All projects</span>
-          </div>
+        <!-- PROJECT CARDS -->
+        <div>
+            <div class="results-head">
+                <strong id="result-count">9 projects</strong>
+                <span id="filter-summary">All projects · No filters applied</span>
+            </div>
 
-          <div class="project-grid" id="projectGrid"></div>
+            <div id="project-grid" class="project-grid"></div>
 
-          <div class="pagination">
-            <span class="showing" id="showingText"></span>
-            <div id="pageButtons" style="display:flex;gap:8px"></div>
-          </div>
-        </section>
+            <div class="pagination">
+                <button class="active" onclick="notify('Page 1 selected')">1</button>
+                <button onclick="notify('Page 2 selected in demo')">2</button>
+                <button onclick="notify('Page 3 selected in demo')">3</button>
+                <span>…</span>
+                <button class="arrow" onclick="notify('Next page is a demo action')">→</button>
+            </div>
 
-      </div>
-    </main>
-  </div>
+            <p class="sub" style="font-size:12px;margin-top:-22px" id="showing">
+                Showing 1–6 of 9 projects
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECT DETAILS PAGE -->
+<section id="details" class="page">
+
+    <div class="page-head detail-page-head">
+        <div>
+            <h1>Project details</h1>
+            <p class="breadcrumb">
+                <a href="#" onclick="showPage('explore');return false">Explore projects</a>
+                &nbsp; / &nbsp; Map a food bank volunteer journey
+            </p>
+        </div>
+
+        <button id="detail-save-btn" class="btn save-action" onclick="toggleSave(1)">
+            □ &nbsp; Save project
+        </button>
+    </div>
+
+    <div style="margin:-8px 0 18px">
+        <button class="text-btn" onclick="showPage('explore')">
+            ← Back to Explore projects
+        </button>
+    </div>
+
+    <div class="detail-layout">
+
+        <div>
+            <div class="panel project-summary">
+                <div>
+                    <span class="badge blue">94% MATCH</span>
+
+                    <h2>Map a food bank volunteer journey</h2>
+
+                    <div class="company">
+                        Harbor Community Food Hub · Community services
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat">◷ Duration<b>4 weeks</b></div>
+                        <div class="stat">▣ Commitment<b>5–7 hrs/week</b></div>
+                        <div class="stat">▥ Level<b>Developing</b></div>
+                        <div class="stat">♙ Team<b>2 students</b></div>
+                    </div>
+                </div>
+
+                <!-- COMPANY BUILDING ICON -->
+                <div class="company-icon" aria-label="Company building">
+                    <span class="building-roof"></span>
+                    <span class="building-body">
+                        <i></i><i></i><i></i>
+                        <i></i><i></i><i></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>About the project</h3>
+
+                <p>
+                    Harbor Community Food Hub wants to make volunteering simpler
+                    and more welcoming. You’ll investigate the experience from
+                    sign-up through a volunteer’s first shift, identify points
+                    of confusion, and create an actionable journey map for staff.
+                </p>
+
+                <div class="outcome">
+                    ◎ &nbsp; Final outcome: a research-backed journey map and
+                    three prioritized service recommendations.
+                </div>
+            </div>
+
+            <div class="two-panels">
+                <div class="panel">
+                    <h3>Requirements</h3>
+
+                    <ul class="tick-list">
+                        <li><span class="tick">✓</span>Attend a 30-minute remote kickoff</li>
+                        <li><span class="tick">✓</span>Interview 4–6 volunteers and one coordinator</li>
+                        <li><span class="tick">✓</span>Share weekly progress in the workspace</li>
+                        <li><span class="tick">✓</span>Present recommendations at final review</li>
+                    </ul>
+                </div>
+
+                <div class="panel">
+                    <h3>What you’ll gain</h3>
+
+                    <ul class="tick-list">
+                        <li><span class="tick">✓</span>Client-ready service design case study</li>
+                        <li><span class="tick">✓</span>Structured feedback from a UX mentor</li>
+                        <li><span class="tick">✓</span>Verified user research and synthesis skills</li>
+                        <li><span class="tick">✓</span>Partner reference after completion</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <aside>
+            <div class="panel right-card">
+                <h3>Ready to contribute?</h3>
+
+                <p>
+                    Applications close October 8. The partner usually responds
+                    within 3 days.
+                </p>
+
+                <div class="match-line">
+                    <span>Your profile match</span>
+                    <strong>94%</strong>
+                </div>
+
+                <div class="progress"><span></span></div>
+
+                <button class="btn primary full" onclick="showPage('apply')">
+                    → &nbsp; Apply for this project
+                </button>
+
+                <p class="center-note">Takes about 5 minutes</p>
+            </div>
+
+            <div class="panel right-card">
+                <h3>Required skills</h3>
+
+                <div class="tags">
+                    <span class="tag">User interviews</span>
+                    <span class="tag">Journey mapping</span>
+                    <span class="tag">Synthesis</span>
+                    <span class="tag">Figma</span>
+                </div>
+
+                <p style="font-size:12px;margin-top:12px">
+                    You match 3 of 4 required skills.
+                </p>
+            </div>
+
+            <div class="panel right-card">
+                <h3>Your mentor</h3>
+
+                <div class="mentor">
+                    <!-- MENTOR PHOTO PLACEHOLDER -->
+                    <div class="mentor-photo">👤</div>
+
+                    <div>
+                        <b>Jordan Lee</b>
+                        <small>Senior Service Designer</small>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</section>
+
+<!-- APPLY PAGE -->
+<section id="apply" class="page">
+
+    <div class="page-head">
+        <div>
+            <h1>Apply for project</h1>
+            <p class="sub">Show the partner why this project is a strong fit.</p>
+        </div>
+
+        <span class="sub" style="font-size:12px">Draft saved just now</span>
+    </div>
+
+    <form id="application-form" class="apply-layout" onsubmit="submitApplication(event)">
+
+        <div>
+            <div class="panel form-panel">
+                <div class="fit-head">
+                    <div>
+                        <h3>Your fit</h3>
+                        <p class="hint">We’ve prefilled this from your profile. Confirm it’s current.</p>
+                    </div>
+
+                    <span class="complete">PROFILE 80% COMPLETE</span>
+                </div>
+
+                <div class="two-panels" style="gap:25px">
+                    <div>
+                        <span class="field-label">FIELD OF STUDY</span>
+                        <span class="field-value">Interaction Design</span>
+                    </div>
+
+                    <div>
+                        <span class="field-label">EXPERIENCE</span>
+                        <span class="field-value">Developing</span>
+                    </div>
+                </div>
+
+                <div class="tags" style="margin-top:16px">
+                    <span class="tag">User interviews</span>
+                    <span class="tag">Journey mapping</span>
+                    <span class="tag">Synthesis</span>
+                    <span class="sub">+ Figma listed as learning</span>
+                </div>
+            </div>
+
+            <div class="panel form-panel">
+                <h3>Your approach</h3>
+
+                <label class="field-label" for="interest">
+                    Why are you interested in this project?
+                </label>
+
+                <textarea
+                    class="form-control"
+                    id="interest"
+                    maxlength="500"
+                    required
+                    oninput="updateCharCount(this)"
+                >I’m interested in improving access to community services, and this brief is a chance to apply journey mapping to a real, high-impact experience. I’m especially motivated by work that makes first-time participation feel clear and welcoming.</textarea>
+
+                <div class="char-count" id="char-count">0 / 500 characters</div>
+
+                <label class="field-label" for="cv-upload">Curriculum Vitae</label>
+
+                <label class="upload-box" for="cv-upload">
+                    <span class="upload-icon">↑</span>
+
+                    <span>
+                        <b id="cv-file-name">Choose a CV file to upload</b>
+                        <small>PDF, DOC, or DOCX · Max 10 MB</small>
+                    </span>
+
+                    <span class="btn">Browse files</span>
+                </label>
+
+                <input
+                    id="cv-upload"
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    hidden
+                    onchange="showCvFile(this)"
+                >
+            </div>
+
+            <div class="panel form-panel">
+                <div class="fit-head">
+                    <h3>Availability</h3>
+                    <span class="sub" style="font-size:12px">
+                        Project asks for 5–7 hours/week
+                    </span>
+                </div>
+
+                <div class="availability-row">
+                    <select class="form-control" id="hours" required>
+                        <option>6–8 hours per week</option>
+                        <option>3–5 hours per week</option>
+                        <option>8–10 hours per week</option>
+                        <option>10+ hours per week</option>
+                    </select>
+
+                    <input
+                        class="form-control"
+                        id="start-date"
+                        type="date"
+                        value="2026-10-14"
+                        required
+                    >
+                </div>
+            </div>
+        </div>
+
+        <aside>
+            <div class="panel">
+                <h3 class="project-side-title">Map a food bank volunteer journey</h3>
+
+                <p class="side-fact">Harbor Community Food Hub</p>
+                <p class="side-fact">◷ &nbsp; 4 weeks · 5–7 hrs/week</p>
+                <p class="side-fact">▥ &nbsp; Developing level</p>
+                <p class="side-fact">▣ &nbsp; Starts October 14</p>
+            </div>
+
+            <div class="panel">
+                <h3>Application checklist</h3>
+
+                <ul class="checklist">
+                    <li><span class="ok">✓</span>Profile details confirmed</li>
+                    <li><span class="ok">✓</span>Interest statement added</li>
+                    <li><span class="ok">✓</span>Approach added</li>
+                    <li><span class="ok">✓</span>Availability confirmed</li>
+                </ul>
+            </div>
+
+            <button type="submit" class="btn primary full">
+                → &nbsp; Submit Application
+            </button>
+
+            <button type="button" class="back-btn" onclick="showPage('details')">
+                Back to project
+            </button>
+
+            <div class="privacy">
+                ♙
+                <span>
+                    Only the project partner and assigned mentor can view your application.
+                </span>
+            </div>
+        </aside>
+    </form>
+</section>
+
+</main>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
 
 <script>
 const projects = [
-  {
-    title: "Map a food bank volunteer journey",
-    org: "Harbor Community Food Hub",
-    category: "UX & product",
-    type: "UX research",
-    skills: ["Interviews", "Journey maps", "User research"],
-    duration: 4, level: "Developing", match: 94
-  },
-  {
-    title: "Design a climate action microsite",
-    org: "Clean Coast Collective",
-    category: "UX & product",
-    type: "Web design",
-    skills: ["Figma", "Content design"],
-    duration: 3, level: "Developing", match: 91
-  },
-  {
-    title: "Prototype an event check-in flow",
-    org: "City Arts Network",
-    category: "UX & product",
-    type: "Product design",
-    skills: ["Wireframing", "Testing"],
-    duration: 5, level: "Intermediate", match: 88
-  },
-  {
-    title: "Research barriers to library access",
-    org: "Northside Public Library",
-    category: "Research",
-    type: "Research",
-    skills: ["Surveys", "Synthesis", "User research"],
-    duration: 4, level: "Beginner", match: 86
-  },
-  {
-    title: "Create a youth program dashboard",
-    org: "Open Doors Initiative",
-    category: "Data & tech",
-    type: "Data design",
-    skills: ["Data visualization", "Figma"],
-    duration: 6, level: "Intermediate", match: 82
-  },
-  {
-    title: "Improve a nonprofit onboarding kit",
-    org: "Good Work Alliance",
-    category: "UX & product",
-    type: "Service design",
-    skills: ["Workshops", "Systems"],
-    duration: 3, level: "Developing", match: 79
-  },
-  {
-    title: "Analyze donor engagement trends",
-    org: "Giving Circle Foundation",
-    category: "Data & tech",
-    type: "Data analysis",
-    skills: ["Spreadsheets", "Insights"],
-    duration: 4, level: "Intermediate", match: 93
-  },
-  {
-    title: "Build a community campaign plan",
-    org: "Neighborhood Futures",
-    category: "Marketing",
-    type: "Marketing",
-    skills: ["Strategy", "Copywriting"],
-    duration: 5, level: "Beginner", match: 87
-  },
-  {
-    title: "Refresh a community garden brand",
-    org: "Green Block Gardens",
-    category: "Marketing",
-    type: "Brand design",
-    skills: ["Identity", "Illustration"],
-    duration: 3, level: "Developing", match: 79
-  },
-  {
-    title: "Create an accessible service guide",
-    org: "Open Hands Network",
-    category: "UX & product",
-    type: "UX design",
-    skills: ["Figma", "Accessibility"],
-    duration: 2, level: "Beginner", match: 85
-  },
-  {
-    title: "Map a public transit experience",
-    org: "Better Routes Lab",
-    category: "Research",
-    type: "User research",
-    skills: ["Interviews", "Journey maps"],
-    duration: 7, level: "Developing", match: 81
-  },
-  {
-    title: "Design a volunteer recruitment page",
-    org: "Local Impact Partners",
-    category: "UX & product",
-    type: "Web design",
-    skills: ["Figma", "Content design"],
-    duration: 3, level: "Beginner", match: 89
-  }
+    {
+        id: 1,
+        badge: "94% match",
+        tone: "green",
+        title: "Map a food bank volunteer journey",
+        org: "Harbor Community Food Hub",
+        category: "UX & product",
+        discipline: "UX research",
+        tags: ["Interviews", "Journey maps"],
+        skills: ["User research", "Figma"],
+        weeks: 4,
+        level: "Developing"
+    },
+    {
+        id: 2,
+        badge: "91% match",
+        tone: "green",
+        title: "Design a climate action microsite",
+        org: "Clean Coast Collective",
+        category: "UX & product",
+        discipline: "Web design",
+        tags: ["Figma", "Content design"],
+        skills: ["Figma", "Content design"],
+        weeks: 3,
+        level: "Developing"
+    },
+    {
+        id: 3,
+        badge: "88% match",
+        tone: "green",
+        title: "Prototype an event check-in flow",
+        org: "City Arts Network",
+        category: "UX & product",
+        discipline: "Product design",
+        tags: ["Wireframing", "Testing"],
+        skills: ["Figma", "User research"],
+        weeks: 5,
+        level: "Intermediate"
+    },
+    {
+        id: 4,
+        badge: "86% match",
+        tone: "green",
+        title: "Research barriers to library access",
+        org: "Northside Public Library",
+        category: "Research",
+        discipline: "Research",
+        tags: ["Surveys", "Synthesis"],
+        skills: ["User research"],
+        weeks: 4,
+        level: "Beginner"
+    },
+    {
+        id: 5,
+        badge: "82% match",
+        tone: "green",
+        title: "Create a youth program dashboard",
+        org: "Open Doors Initiative",
+        category: "Data & tech",
+        discipline: "Data design",
+        tags: ["Data viz", "Figma"],
+        skills: ["Figma", "Data visualization"],
+        weeks: 6,
+        level: "Intermediate"
+    },
+    {
+        id: 6,
+        badge: "79% match",
+        tone: "yellow",
+        title: "Improve a nonprofit onboarding kit",
+        org: "Good Work Alliance",
+        category: "UX & product",
+        discipline: "Service design",
+        tags: ["Workshops", "Systems"],
+        skills: ["User research"],
+        weeks: 3,
+        level: "Developing"
+    },
+    {
+        id: 7,
+        badge: "New",
+        tone: "blue",
+        title: "Build a community campaign plan",
+        org: "Neighborhood Futures",
+        category: "Marketing",
+        discipline: "Marketing",
+        tags: ["Strategy", "Copywriting"],
+        skills: ["Content design"],
+        weeks: 5,
+        level: "Beginner"
+    },
+    {
+        id: 8,
+        badge: "Featured",
+        tone: "yellow",
+        title: "Analyze donor engagement trends",
+        org: "Giving Circle Foundation",
+        category: "Data & tech",
+        discipline: "Data analysis",
+        tags: ["Spreadsheets", "Insights"],
+        skills: ["Data visualization"],
+        weeks: 4,
+        level: "Intermediate"
+    },
+    {
+        id: 9,
+        badge: "Closes soon",
+        tone: "pink",
+        title: "Refresh a community garden brand",
+        org: "Green Block Gardens",
+        category: "Marketing",
+        discipline: "Brand design",
+        tags: ["Identity", "Illustration"],
+        skills: ["Content design"],
+        weeks: 3,
+        level: "Developing"
+    }
 ];
 
-let saved = new Set([
-  "Design a climate action microsite",
-  "Improve a nonprofit onboarding kit"
-]);
+let saved = new Set();
+let showOnlySaved = false;
 
-let activeFilters = {};
-let currentPage = 1;
-let savedOnly = false;
-const pageSize = 6;
+function showPage(id) {
+    document.querySelectorAll(".page").forEach(page => {
+        page.classList.toggle("active", page.id === id);
+    });
 
-const grid = document.getElementById("projectGrid");
+    document.querySelectorAll(".nav button").forEach(button => {
+        button.classList.remove("active");
+    });
 
-function renderCard(project) {
-  const isSaved = saved.has(project.title);
-
-  return `
-    <article class="project-card">
-      <div class="card-top">
-        <span class="badge">${project.match}% match</span>
-        <button class="bookmark ${isSaved ? "saved" : ""}"
-          data-bookmark="${project.title}"
-          aria-label="Toggle bookmark">
-          ${isSaved ? "★" : "☆"}
-        </button>
-      </div>
-
-      <h2>${project.title}</h2>
-      <p class="organization">${project.org}</p>
-      <div class="project-type">◇ &nbsp; ${project.type}</div>
-
-      <div class="tags">
-        ${project.skills.slice(0, 2)
-          .map(skill => `<span class="tag">${skill}</span>`).join("")}
-      </div>
-
-      <div class="card-meta">
-        <span>${project.duration} weeks</span>
-        <span>${project.level}</span>
-      </div>
-
-      <div class="view-project">
-        <span>View project</span><span>→</span>
-      </div>
-    </article>`;
-}
-
-function getSelectedFilters() {
-  const filters = {};
-
-  document.querySelectorAll(".filters input:checked").forEach(input => {
-    if (!filters[input.dataset.group]) {
-      filters[input.dataset.group] = [];
+    if (["explore", "details", "apply"].includes(id)) {
+        const exploreButton = document.querySelectorAll(".nav button")[1];
+        if (exploreButton) exploreButton.classList.add("active");
     }
-    filters[input.dataset.group].push(input.value);
-  });
 
-  return filters;
+    window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function matchesFilters(project) {
-  const f = activeFilters;
+function toggleFilters() {
+    const panel = document.getElementById("filter-panel");
+    const content = document.getElementById("filter-content");
+    const button = document.querySelector(".filter-toggle");
 
-  if (f.category?.length &&
-      !f.category.includes(project.category)) return false;
+    const opening = panel.classList.contains("collapsed");
 
-  if (f.skill?.length &&
-      !f.skill.some(skill => project.skills.includes(skill))) return false;
+    panel.classList.toggle("collapsed", !opening);
+    content.hidden = !opening;
 
-  if (f.level?.length &&
-      !f.level.includes(project.level)) return false;
+    button.setAttribute("aria-expanded", String(opening));
 
-  if (f.duration?.length) {
-    const matchesDuration = f.duration.some(range => {
-      if (range === "1-3") return project.duration >= 1 && project.duration <= 3;
-      if (range === "4-6") return project.duration >= 4 && project.duration <= 6;
-      return project.duration >= 7;
-    });
-
-    if (!matchesDuration) return false;
-  }
-
-  return true;
+    document.getElementById("filter-chevron").textContent =
+        opening ? "⌃" : "⌄";
 }
 
-function render() {
-  const query = document.getElementById("searchInput")
-    .value.toLowerCase().trim();
+function notify(message) {
+    const toast = document.getElementById("toast");
 
-  let list = projects.filter(project => {
-    const searchable = [
-      project.title,
-      project.org,
-      project.category,
-      project.type,
-      ...project.skills
-    ].join(" ").toLowerCase();
+    toast.textContent = message;
+    toast.style.display = "block";
 
-    return searchable.includes(query)
-      && matchesFilters(project)
-      && (!savedOnly || saved.has(project.title));
-  });
+    clearTimeout(window.toastTimer);
 
-  const sort = document.getElementById("sortSelect").value;
+    window.toastTimer = setTimeout(() => {
+        toast.style.display = "none";
+    }, 2400);
+}
 
-  if (sort === "match") {
-    list.sort((a, b) => b.match - a.match);
-  } else if (sort === "title") {
-    list.sort((a, b) => a.title.localeCompare(b.title));
-  } else if (sort === "newest") {
-    list.reverse();
-  }
+function showCvFile(input) {
+    const label = document.getElementById("cv-file-name");
 
-  const totalPages = Math.max(1, Math.ceil(list.length / pageSize));
-  currentPage = Math.min(currentPage, totalPages);
+    if (!input.files || !input.files[0]) return;
 
-  const start = (currentPage - 1) * pageSize;
-  const visible = list.slice(start, start + pageSize);
+    const file = input.files[0];
+    const allowedExtensions = /\.(pdf|doc|docx)$/i;
 
-  grid.innerHTML = visible.length
-    ? visible.map(renderCard).join("")
-    : `<p style="padding:20px;color:#64748b">
-         No projects found. Try another search or filter.
-       </p>`;
-
-  document.getElementById("projectCount").textContent = list.length;
-  document.getElementById("filterCount").textContent = list.length;
-  document.getElementById("savedCount").textContent = saved.size;
-
-  document.getElementById("showingText").textContent = list.length
-    ? `Showing ${start + 1}–${Math.min(start + pageSize, list.length)} of ${list.length} projects`
-    : "Showing 0 projects";
-
-  document.getElementById("resultMeta").textContent =
-    savedOnly ? "Saved projects" :
-    Object.values(activeFilters).flat().join(" · ") || "All projects";
-
-  // Generate pagination buttons
-  const pageButtons = document.getElementById("pageButtons");
-  pageButtons.innerHTML = "";
-
-  for (let page = 1; page <= totalPages; page++) {
-    const button = document.createElement("button");
-    button.className = "page" + (page === currentPage ? " active" : "");
-    button.textContent = page;
-    button.addEventListener("click", () => {
-      currentPage = page;
-      render();
-    });
-    pageButtons.appendChild(button);
-  }
-
-  const next = document.createElement("button");
-  next.className = "page";
-  next.textContent = "→";
-  next.disabled = currentPage >= totalPages;
-  next.addEventListener("click", () => {
-    if (currentPage < totalPages) {
-      currentPage++;
-      render();
+    if (!allowedExtensions.test(file.name)) {
+        notify("Please choose a PDF, DOC, or DOCX file.");
+        input.value = "";
+        label.textContent = "Choose a CV file to upload";
+        return;
     }
-  });
-  pageButtons.appendChild(next);
 
-  // Bookmark interactions
-  grid.querySelectorAll("[data-bookmark]").forEach(button => {
-    button.addEventListener("click", () => {
-      const title = button.dataset.bookmark;
+    if (file.size > 10 * 1024 * 1024) {
+        notify("Please choose a file smaller than 10 MB.");
+        input.value = "";
+        label.textContent = "Choose a CV file to upload";
+        return;
+    }
 
-      if (saved.has(title)) saved.delete(title);
-      else saved.add(title);
-
-      render();
-    });
-  });
+    label.textContent = file.name;
 }
 
-// Search
-document.getElementById("searchInput").addEventListener("input", () => {
-  currentPage = 1;
-  render();
+function updateCharCount(textarea) {
+    document.getElementById("char-count").textContent =
+        textarea.value.length + " / 500 characters";
+}
+
+function toggleSave(id) {
+    if (saved.has(id)) {
+        saved.delete(id);
+    } else {
+        saved.add(id);
+    }
+
+    renderProjects();
+
+    notify(
+        saved.has(id)
+            ? "Project saved."
+            : "Project removed from saved projects."
+    );
+}
+
+function updateSaveButtons() {
+    const savedButton = document.getElementById("saved-projects-btn");
+    const detailButton = document.getElementById("detail-save-btn");
+
+    if (savedButton) {
+        savedButton.classList.toggle("is-saved", saved.size > 0);
+
+        savedButton.innerHTML =
+            (saved.size ? "▣" : "□") +
+            " &nbsp; " +
+            (showOnlySaved ? "Show all projects" : "Saved projects") +
+            ' · <span id="saved-count">' + saved.size + "</span>";
+    }
+
+    if (detailButton) {
+        const isSaved = saved.has(1);
+
+        detailButton.classList.toggle("is-saved", isSaved);
+
+        detailButton.innerHTML = isSaved
+            ? "▣ &nbsp; Project saved"
+            : "□ &nbsp; Save project";
+    }
+}
+
+function openProject(id) {
+    if (id === 1) {
+        showPage("details");
+    } else {
+        notify(
+            "Project details are available for “Map a food bank volunteer journey” in this demo."
+        );
+    }
+}
+
+function showSaved() {
+    showOnlySaved = !showOnlySaved;
+    renderProjects();
+}
+
+function clearFilters() {
+    document.querySelectorAll(".filter").forEach(checkbox => {
+        checkbox.checked = false;
+    });
+
+    document.getElementById("search").value = "";
+    showOnlySaved = false;
+
+    renderProjects();
+}
+
+function clearSearch() {
+    document.getElementById("search").value = "";
+    renderProjects();
+    document.getElementById("search").focus();
+}
+
+function selected(type) {
+    return [...document.querySelectorAll(".filter:checked")]
+        .filter(checkbox => checkbox.dataset.type === type)
+        .map(checkbox => checkbox.value);
+}
+
+function renderProjects() {
+    const searchInput = document.getElementById("search");
+    const query = searchInput.value.toLowerCase().trim();
+
+    const categories = selected("category");
+    const skills = selected("skills");
+    const durations = selected("duration");
+    const levels = selected("level");
+
+    let results = projects.filter(project => {
+        const matchesSaved =
+            !showOnlySaved || saved.has(project.id);
+
+        const searchableText = [
+            project.title,
+            project.org,
+            project.category,
+            project.discipline,
+            ...project.tags,
+            ...project.skills
+        ].join(" ").toLowerCase();
+
+        const matchesSearch =
+            !query || searchableText.includes(query);
+
+        const matchesCategory =
+            !categories.length || categories.includes(project.category);
+
+        const matchesSkills =
+            !skills.length ||
+            skills.some(skill => project.skills.includes(skill));
+
+        const matchesDuration =
+            !durations.length ||
+            durations.some(duration => {
+                if (duration === "1–3") return project.weeks <= 3;
+                if (duration === "4–6") {
+                    return project.weeks >= 4 && project.weeks <= 6;
+                }
+                return project.weeks >= 7;
+            });
+
+        const matchesLevel =
+            !levels.length || levels.includes(project.level);
+
+        return (
+            matchesSaved &&
+            matchesSearch &&
+            matchesCategory &&
+            matchesSkills &&
+            matchesDuration &&
+            matchesLevel
+        );
+    });
+
+    if (document.getElementById("sort").value === "match") {
+        results.sort((a, b) => {
+            const scoreA = parseInt(a.badge) || 0;
+            const scoreB = parseInt(b.badge) || 0;
+            return scoreB - scoreA;
+        });
+    }
+
+    const visibleProjects = results.slice(0, 6);
+
+    const grid = document.getElementById("project-grid");
+
+    if (visibleProjects.length) {
+        grid.innerHTML = visibleProjects.map(project => `
+            <article class="card project-card">
+                <div class="card-top">
+                    <span class="badge ${project.tone}">
+                        ${project.badge}
+                    </span>
+
+                    <button
+                        class="bookmark ${saved.has(project.id) ? "saved" : ""}"
+                        aria-label="Save ${project.title}"
+                        aria-pressed="${saved.has(project.id)}"
+                        onclick="toggleSave(${project.id})"
+                        title="Save project"
+                    ></button>
+                </div>
+
+                <h3>${project.title}</h3>
+
+                <div class="org">${project.org}</div>
+
+                <div class="category">◇ &nbsp; ${project.discipline}</div>
+
+                <div class="tags">
+                    ${project.tags.map(tag => `
+                        <span class="tag">${tag}</span>
+                    `).join("")}
+                </div>
+
+                <div class="project-meta">
+                    <span>${project.weeks} weeks</span>
+                    <span>${project.level}</span>
+                </div>
+
+                <a
+                    class="card-link"
+                    href="#"
+                    onclick="openProject(${project.id}); return false;"
+                >
+                    View project <span>→</span>
+                </a>
+            </article>
+        `).join("");
+    } else {
+        grid.innerHTML = `
+            <div class="empty">
+                No projects match your search. Try changing your filters.
+            </div>
+        `;
+    }
+
+    document.getElementById("result-count").textContent =
+        results.length + (results.length === 1 ? " project" : " projects");
+
+    document.getElementById("apply-filter-btn").textContent =
+        "Apply filters (" + results.length + ")";
+
+    const selectedCount =
+        document.querySelectorAll(".filter:checked").length;
+
+    document.getElementById("selected-filter-count").textContent =
+        selectedCount
+            ? selectedCount + " filter" +
+              (selectedCount === 1 ? "" : "s") + " selected"
+            : "No filters selected";
+
+    document.getElementById("search-clear").hidden = !query;
+
+    document.getElementById("filter-summary").textContent =
+        showOnlySaved
+            ? "Saved projects"
+            : (
+                categories.length ||
+                skills.length ||
+                durations.length ||
+                levels.length
+            )
+                ? "Filters applied"
+                : "All projects · No filters applied";
+
+    document.getElementById("showing").textContent =
+        "Showing 1–" + Math.min(6, results.length) +
+        " of " + results.length + " projects";
+
+document.getElementById('saved-count').textContent = saved.size;
+
+updateSaveButtons();
+}
+
+function submitApplication(e) {
+    e.preventDefault();
+    notify('Application submitted successfully! (Demo only)');
+}
+
+renderProjects();
+
+document.getElementById('filter-content').hidden = true;
+
+updateSaveButtons();
+
+document.addEventListener('keydown', e => {
+    if (
+        (e.metaKey || e.ctrlKey) &&
+        e.key.toLowerCase() === 'k'
+    ) {
+        e.preventDefault();
+        showPage('explore');
+        document.getElementById('search').focus();
+    }
 });
-
-// Sorting
-document.getElementById("sortSelect").addEventListener("change", () => {
-  currentPage = 1;
-  render();
-});
-
-// Apply filters
-document.getElementById("applyFilters").addEventListener("click", () => {
-  activeFilters = getSelectedFilters();
-  currentPage = 1;
-  render();
-});
-
-// Clear filters
-document.getElementById("clearFilters").addEventListener("click", () => {
-  document.querySelectorAll(".filters input")
-    .forEach(input => input.checked = false);
-
-  activeFilters = {};
-  currentPage = 1;
-  render();
-});
-
-// Toggle saved projects
-document.getElementById("savedToggle").addEventListener("click", () => {
-  savedOnly = !savedOnly;
-
-  document.getElementById("savedToggle").innerHTML = savedOnly
-    ? `← All projects · <span id="savedCount">${saved.size}</span>`
-    : `🔖 Saved projects · <span id="savedCount">${saved.size}</span>`;
-
-  currentPage = 1;
-  render();
-});
-
-// Keyboard shortcut: Ctrl + K
-document.addEventListener("keydown", event => {
-  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-    event.preventDefault();
-    document.getElementById("searchInput").focus();
-  }
-});
-
-render();
 </script>
-
 </body>
 </html>
