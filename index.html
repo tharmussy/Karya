@@ -4,295 +4,198 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Karya - Dashboard Home</title>
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="dashboard-body">
+<body>
 
-  <!-- Top Navbar -->
-  <header class="top-nav">
-    <a href="index.html">
-      <img src="logo.png" alt="Karya Logo" class="brand-logo" />
-    </a>
-    <div class="nav-right">
-      <a href="#" class="nav-link">About Us</a>
-      <a href="#" class="nav-link">Support</a>
-      <span class="bell-icon">🔔</span>
-      <div class="user-profile">
-        <img src="https://i.pravatar.cc/100?img=33" alt="John Doe" />
-        <span>John Doe ▾</span>
+<div class="app">
+
+  <!-- SIDEBAR (STANDAR SERAGAM) -->
+  <aside class="sidebar">
+    <div class="logo">
+      <a href="index.html">
+        <img src="logo.png" alt="Karya Logo">
+      </a>
+    </div>
+
+    <p class="group-label">Main</p>
+
+    <nav class="nav">
+      <a href="index.html" class="side-item active">
+        <span class="ico">⌂</span>Home
+      </a>
+      <a href="exploreprojects.html" class="side-item">
+        <span class="ico">⌕</span>Explore projects
+      </a>
+      <a href="applications.html" class="side-item">
+        <span class="ico">▤</span>Applications
+      </a>
+      <a href="#" class="side-item">
+        <span class="ico">◫</span>Workspace
+      </a>
+      <a href="#" class="side-item">
+        <span class="ico">♧</span>Portfolio
+      </a>
+    </nav>
+
+    <p class="group-label" style="margin-top:10px">Communication</p>
+
+    <nav class="nav">
+      <button type="button" onclick="notify('Inbox is a demo item.')">
+        <span class="ico">✉</span>Inbox
+      </button>
+      <button type="button" onclick="notify('Feedback is a demo item.')">
+        <span class="ico">☑</span>Feedback
+      </button>
+    </nav>
+
+    <div class="side-bottom">
+      <nav class="nav">
+        <button type="button" onclick="notify('Settings are not connected in this demo.')">
+          <span class="ico">⚙</span>Settings
+        </button>
+        <button type="button" onclick="notify('Help center is a demo item.')">
+          <span class="ico">ⓘ</span>Help
+        </button>
+      </nav>
+
+      <div class="user">
+        <div class="avatar">●</div>
+        <div>
+          <b>Full Name</b>
+          <small>JohnDoe@gmail.com</small>
+        </div>
+        <span class="logout">⇥</span>
       </div>
     </div>
-  </header>
+  </aside>
 
-  <div class="dashboard-layout">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <a href="index.html" class="side-item active">🏠 Home</a>
-      <a href="exploreprojects.html" class="side-item">🔍 Explore projects</a>
-      <a href="applications.html" class="side-item">📑 Applications</a>
-      <a href="#" class="side-item">💼 Workspace</a>
-      <a href="#" class="side-item">📁 Portfolio</a>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="dash-content">
-      <div class="dash-header">
+  <!-- MAIN CONTENT (DASHBOARD) -->
+  <main>
+    <section class="page active">
+      
+      <!-- DASHBOARD HEADER -->
+      <div class="page-head">
         <div>
           <h1>Hello! John Doe</h1>
           <p class="sub">Here's progress and what you can do next</p>
         </div>
-        <div class="dash-actions">
-          <button class="btn-outline-gold">Upgrade to Karya+</button>
-          <a href="exploreprojects.html">
-          <button class="btn-outline-blue">🔍 Explore Projects</button>
-          </a>
+        <div style="display: flex; gap: 12px;">
+          <button class="btn" style="border-color: #3b82f6; color: #1e40af; font-weight: 600;">Upgrade to Karya+</button>
+          <a href="exploreprojects.html" class="btn primary">🔍 Explore Projects</a>
         </div>
       </div>
 
-      <!-- Stat Cards -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-head">Active project <span>📁</span></div>
-          <div class="stat-num">1</div>
-          <small>Next task due Monday</small>
+      <!-- STAT CARDS -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px;">
+        <div class="panel" style="padding: 20px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted);">Active project <span>📁</span></div>
+          <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">1</div>
+          <small class="sub">Next task due Monday</small>
         </div>
-        <div class="stat-card">
-          <div class="stat-head">Applications <span>📋</span></div>
-          <div class="stat-num">1</div>
-          <small>Update last week</small>
+        <div class="panel" style="padding: 20px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted);">Applications <span>📋</span></div>
+          <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">1</div>
+          <small class="sub">Update last week</small>
         </div>
-        <div class="stat-card">
-          <div class="stat-head">Verified Skills <span>✔️</span></div>
-          <div class="stat-num">3</div>
-          <small>+1 this week</small>
+        <div class="panel" style="padding: 20px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted);">Verified Skills <span>✔️</span></div>
+          <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">3</div>
+          <small class="sub">+1 this week</small>
         </div>
-        <div class="stat-card">
-          <div class="stat-head">Task Completed <span>👁️</span></div>
-          <div class="stat-num">2</div>
-        </div>
-      </div>
-
-      <!-- Bottom Layout Split -->
-      <div class="content-split">
-        <!-- Progress Main Card -->
-        <div class="card-box progress-card">
-          <div class="flex-between">
-            <span class="badge-blue">IN PROGRESS</span>
-            <span class="percent-text">25%</span>
-          </div>
-          <h2 class="mt-10">Wireframe</h2>
-          <p class="sub">Web Dev & UI/UX &bull; Mentor: Ana Rivera</p>
-          
-          <div class="progress-bar-bg mt-15">
-            <div class="progress-bar-fill" style="width: 25%;"></div>
-          </div>
-          <small class="sub block mt-5">2 of 8 tasks complete</small>
-
-          <div class="task-banner mt-20">
-            <div class="task-info">
-              <span class="icon-box">📋</span>
-              <div>
-                <small class="sub block">NEXT TASK &bull; DUE OCT 2</small>
-                <strong>Synthesize interview themes</strong>
-              </div>
-            </div>
-            <button class="btn-open-workspace">Open workspace</button>
-          </div>
-        </div>
-
-        <!-- Weekly Schedule Sidebar Widget -->
-        <div class="card-box schedule-card">
-          <!-- Judul 'This Week' di dalam Blok Biru -->
-          <div class="schedule-header">
-            <h3>This Week</h3>
-          </div>
-          <div class="schedule-list">
-            <div class="sched-item">
-              <span class="day-tag gold">TODAY</span>
-              <div>
-                <strong>Mentor Review</strong>
-                <small class="block sub">03:30 PM</small>
-              </div>
-            </div>
-            <div class="sched-item">
-              <span class="day-tag green">SAT</span>
-              <div>
-                <strong>Task Deadline</strong>
-                <small class="block sub">11:59 PM</small>
-              </div>
-            </div>
-            <div class="sched-item">
-              <span class="day-tag green">WED</span>
-              <div>
-                <strong>Zoom</strong>
-                <small class="block sub">08:00 AM</small>
-              </div>
-            </div>
-            <div class="sched-item">
-              <span class="day-tag gray">MON</span>
-              <div>
-                <strong>Task 2</strong>
-                <small class="block sub">07:30 AM</small>
-              </div>
-            </div>
-          </div>
+        <div class="panel" style="padding: 20px;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted);">Task Completed <span>👁️</span></div>
+          <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">2</div>
         </div>
       </div>
 
-    </main>
-  </div>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karya - Landing Page</title>
-    <!-- Menghubungkan ke file CSS -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Font Plus Jakarta Sans dari Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-</head>
-<body>
-<!-- 
-
-    <div class="warning-banner">
-        <div class="warning-content">
-            <span class="warning-icon">⚠️</span>
-            <p><strong>Tampilan Kurang Optimal:</strong> Halaman ini dirancang untuk layar desktop agar semua grafik dan tabel data terlihat utuh.</p>
-        </div>
-        <div class="warning-actions">
-            <button class="btn-desktop-mode">Ubah ke Mode Desktop</button>
-            <span class="close-icon">&times;</span>
-        </div>
-    </div>
-
-    
-    <div class="top-bar">
-        <span><strong class="badge">PLUS</strong> Get more premium features with Karya+</span>
-        <a href="#">Learn more &rarr;</a>
-    </div>
-
-    
-    <header class="navbar">
-        <div class="logo">
-            <img src="images/KARYA.jpeg" alt="Karya Logo" class="logo-img">
-        </div>
-        <nav class="nav-links">
-            <a href="#">About Us</a>
-            <a href="#">Support</a>
-            <a href="#">Contact</a>
-        </nav>
-        <div class="nav-buttons">
-            <button class="btn-outline">Log in</button>
-            <button class="btn-primary">Get Started For Free</button>
-        </div>
-    </header>
-
-    
-    <section class="hero">
-        <h1>Find Your <span class="highlight-blue">Opportunity,</span><br>Create Your <span class="highlight-yellow">Story.</span></h1>
+      <!-- BOTTOM LAYOUT SPLIT -->
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
         
-        <div class="hero-image-wrapper">
-            <img src="images/HEDDER.jpg" alt="Hero Header Karya" class="hero-img">
-        </div>
-    </section>
+        <!-- PROGRESS MAIN CARD -->
+        <div class="panel" style="padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="background: #dbeafe; color: #1d4ed8; font-size: 0.75rem; font-weight: bold; padding: 4px 10px; border-radius: 4px;">IN PROGRESS</span>
+            <span style="font-weight: bold; color: #2563eb; font-size: 1.3rem;">25%</span>
+          </div>
+          <h2 style="margin-top: 10px; font-size: 1.5rem; font-weight: 700; color: var(--ink);">Wireframe</h2>
+          <p class="sub" style="margin-top: 4px;">Web Dev &amp; UI/UX &bull; Mentor: Ana Rivera</p>
+          
+          <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; margin-top: 15px;">
+            <div style="width: 25%; height: 100%; background: #f59e0b;"></div>
+          </div>
+          <small class="sub" style="display: block; margin-top: 5px;">2 of 8 tasks complete</small>
 
-   
-    <section class="steps-section">
-        <div class="step-card">
-            <div class="step-number">01</div>
-            <h2>Discover<br>Opportunities</h2>
-            <p>Explore internships, freelance projects, volunteering, and programs that match your interests.</p>
-        </div>
-
-        <div class="step-card">
-            <div class="step-number">02</div>
-            <h2>Gain<br>Experience</h2>
-            <p>Turn your interests into real experiences, develop new skills, and learn beyond the classroom.</p>
-        </div>
-
-        <div class="step-card">
-            <div class="step-number">03</div>
-            <h2>Build<br>Your Story</h2>
-            <p>Showcase your achievements and create a portfolio that reflects your growth.</p>
-        </div>
-    </section>
-
-    
-    <section class="journey-section">
-        <div class="journey-box">
-            <h2>Your Journey Starts Here</h2>
-            <p class="journey-sub">Three simple steps to turn your potential into experience</p>
-
-            <div class="journey-cards">
-                <div class="j-card">
-                    <div class="icon">🔍</div>
-                    <h3>Discover</h3>
-                    <p>Explore Opportunities</p>
-                </div>
-
-                <div class="j-card">
-                    <div class="icon">🚀</div>
-                    <h3>Take Action</h3>
-                    <p>Start Gaining Experience</p>
-                </div>
-
-                <div class="j-card">
-                    <div class="icon">📈</div>
-                    <h3>Grow</h3>
-                    <p>Build Your Future</p>
-                </div>
+          <div style="background: #fefce8; border: 1px solid #fef08a; border-radius: 10px; padding: 16px; display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <span style="background: #fef08a; padding: 10px; border-radius: 8px;">📋</span>
+              <div>
+                <small class="sub" style="display: block; font-size: 0.75rem;">NEXT TASK &bull; DUE OCT 2</small>
+                <strong style="color: var(--ink);">Synthesize interview themes</strong>
+              </div>
             </div>
+            <button class="btn" style="background: #ffffff; color: #0b0c4c; border-color: #0b0c4c; font-weight: 600;">Open workspace</button>
+          </div>
         </div>
+
+        <!-- WEEKLY SCHEDULE WIDGET -->
+        <div class="panel" style="padding: 0; overflow: hidden;">
+          <div style="background: #0b0c4c; padding: 18px; text-align: center;">
+            <h3 style="color: #ffffff; font-size: 1.2rem; font-weight: 700; margin: 0;">This Week</h3>
+          </div>
+          <div style="padding: 20px; display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; gap: 16px; align-items: center; font-size: 0.85rem;">
+              <span style="width: 54px; text-align: center; font-size: 0.7rem; font-weight: bold; padding: 5px 0; border-radius: 4px; background: #fef08a; color: #854d0e; flex-shrink: 0;">TODAY</span>
+              <div>
+                <strong style="color: var(--ink); display: block;">Mentor Review</strong>
+                <small class="sub" style="display: block;">03:30 PM</small>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px; align-items: center; font-size: 0.85rem;">
+              <span style="width: 54px; text-align: center; font-size: 0.7rem; font-weight: bold; padding: 5px 0; border-radius: 4px; background: #dcfce7; color: #166534; flex-shrink: 0;">SAT</span>
+              <div>
+                <strong style="color: var(--ink); display: block;">Task Deadline</strong>
+                <small class="sub" style="display: block;">11:59 PM</small>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px; align-items: center; font-size: 0.85rem;">
+              <span style="width: 54px; text-align: center; font-size: 0.7rem; font-weight: bold; padding: 5px 0; border-radius: 4px; background: #dcfce7; color: #166534; flex-shrink: 0;">WED</span>
+              <div>
+                <strong style="color: var(--ink); display: block;">Zoom</strong>
+                <small class="sub" style="display: block;">08:00 AM</small>
+              </div>
+            </div>
+            <div style="display: flex; gap: 16px; align-items: center; font-size: 0.85rem;">
+              <span style="width: 54px; text-align: center; font-size: 0.7rem; font-weight: bold; padding: 5px 0; border-radius: 4px; background: #e2e8f0; color: #475569; flex-shrink: 0;">MON</span>
+              <div>
+                <strong style="color: var(--ink); display: block;">Task 2</strong>
+                <small class="sub" style="display: block;">07:30 AM</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </section>
+  </main>
+</div>
 
-    
-    <section class="partners-section">
-        <h2>Our Partners</h2>
-        <div class="partner-logos">
-            <img src="images/DANANTARAINDONESIA.png" alt="Danantara Indonesia">
-            <img src="images/WINGS.jpeg" alt="Wings Group">
-            <img src="images/BCA.png" alt="BCA">
-            <img src="images/BUMN.png" alt="BUMN">
-        </div>
-    </section>
+<div class="toast" id="toast"></div>
 
-    
-    <footer class="footer">
-        <div class="footer-top">
-            <div class="footer-brand">
-                <h3>Karya, where opportunities<br>shape your story.</h3>
-            </div>
-            
-            <div class="footer-info">
-                <div class="footer-col">
-                    <h4>Contact Us</h4>
-                    <p>Help Center</p>
-                    <p>help@karya.com</p>
-                </div>
-                <div class="footer-col">
-                    <h4>Follow Us</h4>
-                    <div class="social-icons">
-                        <span class="social-btn">📷</span>
-                        <span class="social-btn">🎵</span>
-                        <span class="social-btn">📘</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2026 Karya Indonesia Inc. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Use</a>
-            </div>
-        </div>
-    </footer> -->
+<script>
+function notify(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  setTimeout(() => { toast.style.display = "none"; }, 2400);
+}
+</script>
 
 </body>
 </html>

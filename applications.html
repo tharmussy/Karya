@@ -9,116 +9,163 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- MENGGUNAKAN STYLE.CSS YANG SAMA PERSIS DENGAN INDEX.HTML -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Top Navbar -->
-  <header class="top-nav">
-    <a href="index.html">
-      <img src="logo.png" alt="Karya Logo" class="brand-logo" />
-    </a>
-    <div class="nav-right">
-      <a href="#" class="nav-link">About Us</a>
-      <a href="#" class="nav-link">Support</a>
-      <span class="bell-icon">🔔</span>
-      <div class="user-profile">
-        <img src="https://i.pravatar.cc/100?img=33" alt="John Doe" />
-        <span>John Doe ▾</span>
-      </div>
-    </div>
-  </header>
+<div class="app">
 
-    <!-- MAIN LAYOUT -->
-    <div class="dashboard-layout">
-        
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <a href="index.html" class="side-item">🏠 Home</a>
-            <a href="exploreprojects.html" class="side-item">🔍 Explore projects</a>
-            <a href="applications.html" class="side-item active">📑 Applications</a>
-            <a href="#" class="side-item">💼 Workspace</a>
-            <a href="#" class="side-item">📁 Portfolio</a>
-        </aside>
+    <!-- SIDEBAR (STANDAR SERAGAM) -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Karya Logo">
+            </a>
+        </div>
 
-        <!-- MAIN CONTENT AREA -->
-        <main class="dash-content">
+        <p class="group-label">Main</p>
+
+        <nav class="nav">
+            <a href="index.html" class="side-item">
+                <span class="ico">⌂</span>Home
+            </a>
+            <a href="exploreprojects.html" class="side-item">
+                <span class="ico">⌕</span>Explore projects
+            </a>
+            <a href="applications.html" class="side-item active">
+                <span class="ico">▤</span>Applications
+            </a>
+            <a href="#" class="side-item">
+                <span class="ico">◫</span>Workspace
+            </a>
+            <a href="#" class="side-item">
+                <span class="ico">♧</span>Portfolio
+            </a>
+        </nav>
+
+        <p class="group-label" style="margin-top:10px">Communication</p>
+
+        <nav class="nav">
+            <button type="button" onclick="notify('Inbox is a demo item.')">
+                <span class="ico">✉</span>Inbox
+            </button>
+            <button type="button" onclick="notify('Feedback is a demo item.')">
+                <span class="ico">☑</span>Feedback
+            </button>
+        </nav>
+
+        <div class="side-bottom">
+            <nav class="nav">
+                <button type="button" onclick="notify('Settings are not connected in this demo.')">
+                    <span class="ico">⚙</span>Settings
+                </button>
+                <button type="button" onclick="notify('Help center is a demo item.')">
+                    <span class="ico">ⓘ</span>Help
+                </button>
+            </nav>
+
+            <div class="user">
+                <div class="avatar">●</div>
+                <div>
+                    <b>Full Name</b>
+                    <small>JohnDoe@gmail.com</small>
+                </div>
+                <span class="logout">⇥</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main>
+        <section class="page active">
             
-            <div class="page-header" style="margin-bottom: 30px;">
-                <h1 style="font-size: 28px; font-weight: 800; color: #0f172a; margin-bottom: 6px;">Applications</h1>
-                <p style="font-size: 14px; color: #64748b;">Track decisions, next steps, and feedback in one place.</p>
+            <div class="page-head">
+                <div>
+                    <h1>Applications</h1>
+                    <p class="sub">Track decisions, next steps, and feedback in one place.</p>
+                </div>
             </div>
 
             <!-- STATS GRID -->
-            <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px;">
-                <div class="stat-card active" style="background: #fff; border: 1px solid #3b82f6; border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
-                    <span class="stat-label" style="font-size: 14px; font-weight: 600; color: #1d4ed8;">All applications</span>
-                    <span class="stat-value" style="font-size: 20px; font-weight: 800; color: #0f172a;">1</span>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 36px;">
+                <div class="panel" style="border-color: #3b82f6; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 14px; font-weight: 600; color: #1d4ed8;">All applications</span>
+                    <span style="font-size: 20px; font-weight: 800; color: #0f172a;">1</span>
                 </div>
-                <div class="stat-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
-                    <span class="stat-label" style="font-size: 14px; font-weight: 600; color: #334155;">Pending</span>
-                    <span class="stat-value" style="font-size: 20px; font-weight: 800; color: #0f172a;">0</span>
+                <div class="panel" style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 14px; font-weight: 600; color: #334155;">Pending</span>
+                    <span style="font-size: 20px; font-weight: 800; color: #0f172a;">0</span>
                 </div>
-                <div class="stat-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
-                    <span class="stat-label" style="font-size: 14px; font-weight: 600; color: #334155;">Accepted</span>
-                    <span class="stat-value" style="font-size: 20px; font-weight: 800; color: #0f172a;">1</span>
+                <div class="panel" style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 14px; font-weight: 600; color: #334155;">Accepted</span>
+                    <span style="font-size: 20px; font-weight: 800; color: #0f172a;">1</span>
                 </div>
-                <div class="stat-card" style="background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
-                    <span class="stat-label" style="font-size: 14px; font-weight: 600; color: #334155;">Not selected</span>
-                    <span class="stat-value" style="font-size: 20px; font-weight: 800; color: #0f172a;">0</span>
+                <div class="panel" style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 14px; font-weight: 600; color: #334155;">Not selected</span>
+                    <span style="font-size: 20px; font-weight: 800; color: #0f172a;">0</span>
                 </div>
             </div>
 
             <!-- RECENT APPLICATIONS SECTION -->
-            <div class="section-header" style="margin-bottom: 20px;">
+            <div style="margin-bottom: 20px;">
                 <h2 style="font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 4px;">Recent applications</h2>
-                <p style="font-size: 13px; color: #64748b;">Status examples show what happens after you apply.</p>
+                <p class="sub">Status examples show what happens after you apply.</p>
             </div>
 
             <!-- APPLICATION ITEM CARD -->
-            <div class="app-card" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
-                <div class="app-card-top" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
-                    <div class="app-info-group" style="display: flex; gap: 16px; align-items: flex-start;">
-                        <div class="app-icon" style="width: 44px; height: 44px; background-color: #dcfce7; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #16a34a; font-size: 20px;">✓</div>
-                        <div class="app-details">
+            <div class="panel" style="padding: 24px; margin-bottom: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                    <div style="display: flex; gap: 16px; align-items: flex-start;">
+                        <div style="width: 44px; height: 44px; background-color: #dcfce7; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #16a34a; font-size: 20px;">✓</div>
+                        <div>
                             <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 10px;">
                                 Map a food bank volunteer journey 
-                                <span class="badge-accepted" style="background-color: #15803d; color: #ffffff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px;">Accepted</span>
+                                <span style="background-color: #15803d; color: #ffffff; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px;">Accepted</span>
                             </h3>
-                            <p class="app-subtext" style="font-size: 13px; color: #64748b; margin-top: 4px;">Harbor Community Food Hub · Applied Sep 28</p>
-                            <p class="app-subtext" style="font-size: 13px; color: #64748b; margin-top: 4px;"><strong style="color: #334155;">Kickoff is scheduled for Oct 1 at 3:30 PM</strong></p>
+                            <p class="sub" style="margin-top: 4px;">Harbor Community Food Hub · Applied Sep 28</p>
+                            <p class="sub" style="margin-top: 4px;"><strong style="color: #334155;">Kickoff is scheduled for Oct 1 at 3:30 PM</strong></p>
                         </div>
                     </div>
-                    <div class="app-actions" style="display: flex; gap: 10px;">
-                        <button class="btn-primary-blue" style="background-color: #2563eb; color: #ffffff; border: none; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">Open workspace</button>
-                        <button class="btn-secondary-light" style="background-color: #ffffff; color: #1e293b; border: 1px solid #cbd5e1; padding: 10px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;">View details</button>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn primary">Open workspace</button>
+                        <button class="btn">View details</button>
                     </div>
                 </div>
 
-                <!-- BANNER INSIDE CARD -->
-                <div class="app-banner" style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: #166534;">
-                    <div class="banner-left" style="display: flex; align-items: center; gap: 8px;">
+                <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: #166534;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
                         <span>📅</span> You're in! Review the brief and introduce yourself before kickoff.
                     </div>
-                    <a href="#" class="banner-link" style="color: #15803d; font-weight: 700; text-decoration: none;">View kickoff checklist →</a>
+                    <a href="#" style="color: #15803d; font-weight: 700;">View kickoff checklist →</a>
                 </div>
             </div>
 
             <!-- INFO BOX AT BOTTOM -->
-            <div class="info-box" style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 14px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;">
-                <div class="info-box-left" style="display: flex; align-items: flex-start; gap: 12px;">
-                    <span class="info-icon" style="color: #2563eb; font-size: 18px; margin-top: 2px;">ⓘ</span>
-                    <div class="info-text">
+            <div class="panel" style="padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: flex-start; gap: 12px;">
+                    <span style="color: #2563eb; font-size: 18px; margin-top: 2px;">ⓘ</span>
+                    <div>
                         <h4 style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 2px;">What happens while an application is pending?</h4>
-                        <p style="font-size: 12px; color: #64748b;">Partners review your profile and answers, then may send one follow-up question. You'll receive a notification as soon as the status changes.</p>
+                        <p class="sub" style="font-size: 12px;">Partners review your profile and answers, then may send one follow-up question. You'll receive a notification as soon as the status changes.</p>
                     </div>
                 </div>
-                <a href="#" class="info-link" style="font-size: 13px; font-weight: 700; color: #0f172a; text-decoration: none;">Application tips</a>
+                <a href="#" style="font-size: 13px; font-weight: 700; color: #0f172a;">Application tips</a>
             </div>
 
-        </main>
-    </div>
+        </section>
+    </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function notify(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  setTimeout(() => { toast.style.display = "none"; }, 2400);
+}
+</script>
 
 </body>
 </html>
