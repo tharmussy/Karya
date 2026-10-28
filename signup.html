@@ -4,20 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Karya - Sign Up & Onboarding</title>
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS MASTER -->
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="auth-body">
+<body>
 
+  <!-- LOGO POJOK KIRI ATAS -->
   <header class="auth-header">
     <a href="index.html">
-      <img src="logo.png" alt="Karya Logo" class="brand-logo" />
+      <img src="IMAGES/KARYA.jpeg" alt="Karya Logo" class="brand-logo" />
     </a>
   </header>
 
   <main class="auth-container">
     
-    <!-- CREATE ACCOUNT / SIGN UP -->
-    <section id="step-0" class="step-card active" style="width: 100%;">
+    <!-- STEP 0: CREATE ACCOUNT / SIGN UP FORM -->
+    <section id="step-0" style="width: 100%;">
       <div class="auth-split">
         <div class="auth-form-side">
           <h2>Create your account</h2>
@@ -25,20 +32,20 @@
             <div class="form-row">
               <div class="form-group">
                 <label>First Name</label>
-                <input type="text" placeholder="" required />
+                <input type="text" placeholder="John" required />
               </div>
               <div class="form-group">
                 <label>Last Name</label>
-                <input type="text" placeholder="" required />
+                <input type="text" placeholder="Doe" required />
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-15">
               <label>Email</label>
-              <input type="email" placeholder="" required />
+              <input type="email" placeholder="john.doe@example.com" required />
             </div>
-            <div class="form-group">
+            <div class="form-group mt-15">
               <label>Password</label>
-              <input type="password" placeholder="" required />
+              <input type="password" placeholder="Create a strong password" required />
               <small class="sub block mt-5">Use 8+ characters with a number.</small>
             </div>
             <div class="checkbox-group">
@@ -49,9 +56,17 @@
             <p class="auth-foot">Already have an account? <a href="signin.html">Log In</a></p>
           </form>
         </div>
+        
         <div class="auth-image-side">
           <div class="union-mask-wrapper">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80" alt="Onboarding Image" class="union-img" />
+            <svg width="0" height="0" style="position: absolute;">
+              <defs>
+                <clipPath id="figma-union-clip" clipPathUnits="objectBoundingBox">
+                  <rect x="0" y="0" width="1" height="1" rx="0.04" />
+                </clipPath>
+              </defs>
+            </svg>
+            <img src="IMAGES/hero-auth.jpg" alt="Onboarding Image" class="union-img" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80'" />
           </div>
         </div>
       </div>
@@ -81,55 +96,55 @@
       </div>
 
       <!-- STEP 1: PROFILE -->
-      <section id="step-1" class="wizard-card step-card">
+      <section id="step-1" class="wizard-card">
         <div class="card-box">
           <div class="form-group">
             <label>College</label>
-            <input type="text" placeholder="" />
+            <input type="text" class="input-styled mt-5" placeholder="e.g. Bina Nusantara University" />
           </div>
           <div class="form-group mt-15">
             <label>Highest Education</label>
-            <input type="text" placeholder="" />
+            <input type="text" class="input-styled mt-5" placeholder="e.g. Bachelor's Degree" />
           </div>
           <div class="form-group mt-15">
             <label>Current Semester</label>
-            <input type="text" placeholder="" />
+            <input type="text" class="input-styled mt-5" placeholder="e.g. Semester 5" />
           </div>
         </div>
-        <button class="btn-primary full mt-20" onclick="goToStep(2)">&rarr; Next</button>
+        <button type="button" class="btn-primary full mt-20" onclick="goToStep(2)">&rarr; Next</button>
       </section>
 
       <!-- STEP 2: INTERESTS -->
-      <section id="step-2" class="wizard-card step-card hidden">
+      <section id="step-2" class="wizard-card hidden">
         <div class="card-box">
           <h3>Interests</h3>
           <p class="sub mt-5">Choose topics you'd enjoy working on.</p>
           <div class="chip-group mt-15">
-            <button class="chip" onclick="toggleChip(this)">Education</button>
-            <button class="chip" onclick="toggleChip(this)">Climate</button>
-            <button class="chip" onclick="toggleChip(this)">Accessible design</button>
-            <button class="chip" onclick="toggleChip(this)">Civic tech</button>
-            <button class="chip" onclick="toggleChip(this)">Health</button>
-            <button class="chip outline">+add more...</button>
+            <button type="button" class="chip" onclick="toggleChip(this)">Education</button>
+            <button type="button" class="chip" onclick="toggleChip(this)">Climate</button>
+            <button type="button" class="chip" onclick="toggleChip(this)">Accessible design</button>
+            <button type="button" class="chip" onclick="toggleChip(this)">Civic tech</button>
+            <button type="button" class="chip" onclick="toggleChip(this)">Health</button>
+            <button type="button" class="chip outline">+add more...</button>
           </div>
         </div>
         <div class="card-box mt-15">
           <h3>Other</h3>
           <p class="sub mt-5">Enter your answer here if none of the options apply.</p>
-          <input type="text" class="input-styled mt-10" placeholder="" />
+          <input type="text" class="input-styled mt-10" placeholder="Type here..." />
         </div>
-        <button class="btn-primary full mt-20" onclick="goToStep(3)">&rarr; Next</button>
+        <button type="button" class="btn-primary full mt-20" onclick="goToStep(3)">&rarr; Next</button>
       </section>
 
       <!-- STEP 3: SKILLS -->
-      <section id="step-3" class="wizard-card step-card hidden">
+      <section id="step-3" class="wizard-card hidden">
         <div class="card-box">
           <div class="flex-between">
             <h3>Skills</h3>
             <span class="badge" id="skill-badge">0 SELECTED</span>
           </div>
           <p class="sub mt-5">Search or add a skill</p>
-          <input type="text" id="skill-input" class="input-blue-bg mt-10" placeholder="e.g. user research" oninput="handleSkillInput(this.value)" />
+          <input type="text" id="skill-input" class="input-styled mt-10" placeholder="e.g. user research" oninput="handleSkillInput(this.value)" />
           <small class="sub block mt-5">Add a level to help partners set realistic expectations.</small>
           
           <div class="chip-group mt-15" id="skill-tags-container"></div>
@@ -138,21 +153,21 @@
         <div class="card-box mt-15">
           <h3>Experience Level</h3>
           <div class="chip-group mt-10">
-            <button class="chip exp-btn" onclick="selectExp(this, 'Beginner')">Beginner</button>
-            <button class="chip exp-btn" onclick="selectExp(this, 'Intermediate')">Intermediate</button>
-            <button class="chip exp-btn" onclick="selectExp(this, 'Professional')">Professional</button>
+            <button type="button" class="chip exp-btn" onclick="selectExp(this, 'Beginner')">Beginner</button>
+            <button type="button" class="chip exp-btn" onclick="selectExp(this, 'Intermediate')">Intermediate</button>
+            <button type="button" class="chip exp-btn" onclick="selectExp(this, 'Professional')">Professional</button>
           </div>
         </div>
 
         <div class="flex-end mt-15">
-          <button class="btn-blue-soft" onclick="addSkillFromInput()">+ Add Skills</button>
+          <button type="button" class="btn-blue-soft" onclick="addSkillFromInput()">+ Add Skills</button>
         </div>
 
-        <button class="btn-primary full mt-20" onclick="goToStep(4)">&rarr; Next</button>
+        <button type="button" class="btn-primary full mt-20" onclick="goToStep(4)">&rarr; Next</button>
       </section>
 
       <!-- STEP 4: GOALS -->
-      <section id="step-4" class="wizard-card step-card hidden">
+      <section id="step-4" class="wizard-card hidden">
         <div class="card-box">
           <h3>Goals</h3>
           <p class="sub mt-5">Choose your goals</p>
@@ -160,28 +175,19 @@
             <label class="check-item"><input type="checkbox" /> Build a strong portfolio</label>
             <label class="check-item"><input type="checkbox" /> Practice working with a client</label>
             <label class="check-item"><input type="checkbox" /> Explore a career direction</label>
-            <label class="check-item"><input type="checkbox" /> more...</label>
+            <label class="check-item"><input type="checkbox" /> More...</label>
           </div>
         </div>
         <div class="card-box mt-15">
           <h3>Other</h3>
           <p class="sub mt-5">Enter your answer here if none of the options apply.</p>
-          <input type="text" class="input-blue-bg mt-10" placeholder="" />
+          <input type="text" class="input-styled mt-10" placeholder="Type here..." />
         </div>
-        <button class="btn-primary full mt-20" onclick="window.location.href='index.html'">&rarr; Next</button>
+        <button type="button" class="btn-primary full mt-20" onclick="window.location.href='index.html'">&rarr; Next</button>
       </section>
     </div>
 
   </main>
-
-  <!-- SVG Clip-Path -->
-  <svg width="0" height="0" style="position:absolute;">
-    <defs>
-      <clipPath id="figma-union-clip" clipPathUnits="objectBoundingBox">
-        <path d="M 0.22,0 C 0.12,0 0.12,0 0.12,0.08 V 0.16 H 0.1 C 0,0.16 0,0.16 0,0.25 V 0.92 C 0,1 0,1 0.1,1 H 0.78 C 0.88,1 0.88,1 0.88,0.92 V 0.84 H 0.90 C 1,0.84 1,0.84 1,0.75 V 0.08 C 1,0 1,0 0.88,0 Z" />
-      </clipPath>
-    </defs>
-  </svg>
 
   <script>
     let currentSkillText = "";
@@ -193,14 +199,23 @@
       document.getElementById('onboarding-wrapper').classList.remove('hidden');
 
       for (let i = 1; i <= 4; i++) {
-        document.getElementById('step-' + i).classList.add('hidden');
+        let stepEl = document.getElementById('step-' + i);
         let ind = document.getElementById('ind-' + i);
+        
+        stepEl.classList.add('hidden');
         ind.classList.remove('active', 'completed');
-        if (i < 4) document.getElementById('line-' + i).classList.remove('completed');
+        
+        if (i < 4) {
+          let line = document.getElementById('line-' + i);
+          if (line) line.classList.remove('completed');
+        }
 
         if (i < stepNumber) {
           ind.classList.add('completed');
-          if (i < 4) document.getElementById('line-' + i).classList.add('completed');
+          if (i < 4) {
+            let line = document.getElementById('line-' + i);
+            if (line) line.classList.add('completed');
+          }
         } else if (i === stepNumber) {
           ind.classList.add('active');
         }
@@ -208,13 +223,20 @@
       document.getElementById('step-' + stepNumber).classList.remove('hidden');
     }
 
-    function toggleChip(btn) { btn.classList.toggle('selected'); }
-    function handleSkillInput(val) { currentSkillText = val.trim(); }
+    function toggleChip(btn) { 
+      btn.classList.toggle('selected'); 
+    }
+    
+    function handleSkillInput(val) { 
+      currentSkillText = val.trim(); 
+    }
+    
     function selectExp(btn, level) {
       document.querySelectorAll('.exp-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
       selectedLevel = level;
     }
+    
     function addSkillFromInput() {
       if (!currentSkillText) return;
       let levelText = selectedLevel ? selectedLevel : 'Intermediate';
