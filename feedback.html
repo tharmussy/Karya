@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Karya</title>
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+    <!-- SIDEBAR UNIVERSAL -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Karya Logo">
+            </a>
+        </div>
+
+        <p class="group-label">Main</p>
+
+        <nav class="nav">
+    <a href="index.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        Home
+    </a>
+    <a href="exploreprojects.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        Explore projects
+    </a>
+    <a href="applications.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        Applications
+    </a>
+    <a href="workspace.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Workspace
+    </a>
+    <a href="portfolio.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        Portfolio
+    </a>
+</nav>
+
+        <p class="group-label" style="margin-top:10px">Communication</p>
+
+        <nav class="nav">
+            <a href="inbox.html" class="side-item">
+                <span class="ico">✉</span>Inbox
+            </a>
+            <a href="feedback.html" class="side-item active">
+                <span class="ico">☑</span>Feedback
+            </a>
+        </nav>
+
+        <div class="side-bottom">
+            <nav class="nav">
+                <a href="profile.html" class="side-item">
+                    <span class="ico">⚙</span>Settings
+                </a>
+                <button type="button" onclick="notify('Help center is a demo item.')">
+                    <span class="ico">ⓘ</span>Help
+                </button>
+            </nav>
+
+            <div class="user">
+                <div class="avatar">●</div>
+                <div>
+                    <b>Full Name</b>
+                    <small>JohnDoe@gmail.com</small>
+                </div>
+                <span class="logout" onclick="window.location.href='signin.html'" title="Log out">
+                    <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                </span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <section class="page active">
+            <div class="feedback-container">
+                
+                <div class="page-head">
+                    <div>
+                        <h1>Send Feedback</h1>
+                        <p class="sub">Help us improve the Karya dashboard platform experience.</p>
+                    </div>
+                </div>
+
+                <!-- CARD FORM FEEDBACK -->
+                <div id="feedback-form-card" class="panel" style="padding: 32px;">
+                    
+                    <!-- KATEGORI FEEDBACK -->
+                    <label style="display:block; font-weight: 700; margin-bottom: 10px; font-size: 13px;">What kind of feedback is this?</label>
+                    <div class="category-chips">
+                        <button type="button" class="cat-chip active" onclick="selectCategory(this)">💡 General Experience</button>
+                        <button type="button" class="cat-chip" onclick="selectCategory(this)">🚀 Feature Request</button>
+                        <button type="button" class="cat-chip" onclick="selectCategory(this)">🐛 Bug / Error Report</button>
+                    </div>
+
+                    <!-- RATING BINTANG -->
+                    <label style="display:block; font-weight: 700; margin-top: 20px; font-size: 13px;">How satisfied are you with Karya so far?</label>
+                    <div class="stars-row">
+                        <span class="feedback-star" onclick="setRating(1)">★</span>
+                        <span class="feedback-star" onclick="setRating(2)">★</span>
+                        <span class="feedback-star" onclick="setRating(3)">★</span>
+                        <span class="feedback-star" onclick="setRating(4)">★</span>
+                        <span class="feedback-star" onclick="setRating(5)">★</span>
+                    </div>
+
+                    <!-- KOTAK PESAN MASUKAN -->
+                    <div class="form-group" style="margin-top: 16px;">
+                        <label>Your message or suggestions</label>
+                        <textarea class="input-styled" id="feedback-text" style="height: 110px; resize: none; margin-top: 6px;" placeholder="Tell us what you love or what we can improve..."></textarea>
+                    </div>
+
+                    <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+                        <a href="index.html" class="btn">Cancel</a>
+                        <button type="button" class="btn primary" onclick="submitFeedback()">Submit Feedback →</button>
+                    </div>
+                </div>
+
+                <!-- STATE SUCCESS (THANK YOU CARD) -->
+                <div id="feedback-success-card" class="panel hidden" style="padding: 48px 32px; text-align: center;">
+                    <div style="width: 60px; height: 60px; background: #dcfce7; color: #16a34a; border-radius: 50%; display: grid; place-items: center; font-size: 28px; margin: 0 auto 16px;">✓</div>
+                    <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 8px; color: var(--ink);">Thank You!</h2>
+                    <p class="sub" style="font-size: 14px; margin-bottom: 24px;">Your feedback has been successfully recorded. We truly appreciate your help in making Karya better for everyone!</p>
+                    <a href="index.html" class="btn primary" style="display: inline-block; width: 200px;">Back to Dashboard</a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let currentRating = 0;
+
+function selectCategory(btn) {
+    document.querySelectorAll(".cat-chip").forEach(c => c.classList.remove("active"));
+    btn.classList.add("active");
+}
+
+function setRating(n) {
+    currentRating = n;
+    const stars = document.querySelectorAll(".feedback-star");
+    stars.forEach((s, idx) => {
+        if (idx < n) s.classList.add("active");
+        else s.classList.remove("active");
+    });
+}
+
+function submitFeedback() {
+    if (currentRating === 0) {
+        notify("Please select a star rating first!");
+        return;
+    }
+    document.getElementById("feedback-form-card").classList.add("hidden");
+    document.getElementById("feedback-success-card").classList.remove("hidden");
+}
+
+function notify(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.style.display = "block";
+    setTimeout(() => { t.style.display = "none"; }, 2400);
+}
+</script>
+</body>
+</html>

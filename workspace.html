@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workspace - Karya</title>
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS Khusus Workspace Sub-Tabs & Flow Stepper */
+        .workspace-tabs {
+            display: flex;
+            gap: 24px;
+            border-bottom: 1px solid var(--line);
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.15s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--blue2);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--blue2);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Flow Stepper (Submit Work) */
+        .stepper-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .step-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .step-circle.active {
+            background: var(--blue2);
+            color: #fff;
+        }
+
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: #e2e8f0;
+        }
+
+        .step-line.active {
+            background: var(--blue2);
+        }
+
+        /* Task Board Columns */
+        .task-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .task-col {
+            background: #f8fafc;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .task-item {
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            cursor: pointer;
+            transition: border-color 0.15s;
+        }
+
+        .task-item:hover {
+            border-color: var(--blue2);
+        }
+
+        .btn-add-task {
+            width: 100%;
+            background: none;
+            border: 1px dashed var(--line);
+            padding: 8px;
+            border-radius: 8px;
+            color: var(--muted);
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .btn-add-task:hover {
+            background: #f1f5f9;
+            color: var(--ink);
+        }
+    </style>
+</head>
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR UNIVERSAL -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Karya Logo">
+            </a>
+        </div>
+
+        <p class="group-label">Main</p>
+
+        <nav class="nav">
+    <a href="index.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        Home
+    </a>
+    <a href="exploreprojects.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        Explore projects
+    </a>
+    <a href="applications.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        Applications
+    </a>
+    <a href="workspace.html" class="side-item active">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Workspace
+    </a>
+    <a href="portfolio.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        Portfolio
+    </a>
+</nav>
+
+        <p class="group-label" style="margin-top:10px">Communication</p>
+
+        <nav class="nav">
+            <a href="inbox.html" class="side-item">
+                <span class="ico">✉</span>Inbox
+            </a>
+            <a href="feedback.html" class="side-item">
+                <span class="ico">☑</span>Feedback
+            </a>
+        </nav>
+
+        <div class="side-bottom">
+            <nav class="nav">
+                <a href="profile.html" class="side-item">
+                    <span class="ico">⚙</span>Settings
+                </a>
+                <button type="button" onclick="notify('Help center is a demo item.')">
+                    <span class="ico">ⓘ</span>Help
+                </button>
+            </nav>
+
+            <div class="user">
+                <div class="avatar">●</div>
+                <div>
+                    <b>Full Name</b>
+                    <small>JohnDoe@gmail.com</small>
+                </div>
+                <span class="logout" onclick="window.location.href='signin.html'" title="Log out">
+                    <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                </span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main>
+        <section class="page active">
+            
+            <!-- WORKSPACE HEADER -->
+            <div class="page-head" style="margin-bottom: 16px;">
+                <div>
+                    <h1 id="workspace-title">Project workspace</h1>
+                    <p class="sub" id="workspace-sub">Map a food bank volunteer journey · Harbor Community Food Hub</p>
+                </div>
+                <div>
+                    <button class="btn" onclick="switchSubTab('communication')" style="display: flex; align-items: center; gap: 8px;">
+                        💬 Message mentor
+                    </button>
+                </div>
+            </div>
+
+            <!-- SUB TABS NAVIGATION -->
+            <div class="workspace-tabs" id="main-workspace-tabs">
+                <button class="tab-btn active" onclick="switchSubTab('brief')">Brief</button>
+                <button class="tab-btn" onclick="switchSubTab('tasks')">Tasks</button>
+                <button class="tab-btn" onclick="switchSubTab('resources')">Resources</button>
+                <button class="tab-btn" onclick="switchSubTab('progress')">Progress</button>
+                <button class="tab-btn" onclick="switchSubTab('communication')">Communication</button>
+                <button class="tab-btn" onclick="showSubmitFlow(1)" style="margin-left: auto; color: var(--blue2);">📤 Submit work flow</button>
+            </div>
+
+            <!-- ================= TAB 1: BRIEF (NO SCROLL / FULL SERAGAM) ================= -->
+            <div id="tab-brief" class="tab-content active">
+                <div style="display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start;">
+                    
+                    <!-- KOLOM KIRI (BRIEF & DETAILS) -->
+                    <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <div class="panel" style="padding: 18px 20px; background: #eff6ff; border-color: #bfdbfe;">
+                            <span class="badge blue" style="margin-bottom: 6px;">PROJECT BRIEF</span>
+                            <h3 style="font-size: 16px; margin-bottom: 6px; color: #1e3a8a;">Map a Food Bank Volunteer Journey</h3>
+                            <p class="sub" style="color: #1e40af; font-size: 13px; line-height: 1.4;">We are looking for a motivated UX researcher to help Harbor Community Food Hub understand and improve its volunteer experience. This project focuses on mapping current processes and identifying challenges.</p>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                            <div class="panel" style="padding: 16px;">
+                                <h4 style="font-size: 13px; margin-bottom: 6px;">📄 Project Overview</h4>
+                                <p class="sub" style="font-size: 12px; line-height: 1.4;">Focuses on mapping the current volunteer journey, identifying challenges, and discovering opportunities to create a smoother experience.</p>
+                            </div>
+
+                            <div class="panel" style="padding: 16px;">
+                                <h4 style="font-size: 13px; margin-bottom: 6px;">📋 Objective</h4>
+                                <ul style="padding-left: 16px; color: var(--muted); font-size: 12px; line-height: 1.4;">
+                                    <li>Understand volunteer needs & motivations.</li>
+                                    <li>Identify pain points throughout the journey.</li>
+                                    <li>Recommend actionable improvements.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="panel" style="padding: 16px;">
+                            <h4 style="font-size: 13px; margin-bottom: 6px;">📦 Deliverables</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px;">
+                                <span class="tag">Interview Guide</span>
+                                <span class="tag">Research Findings</span>
+                                <span class="tag">Journey Map (Figma/PDF)</span>
+                                <span class="tag">Final Presentation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KOLOM KANAN (PARTNER INFO & META) -->
+                    <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <div class="panel" style="padding: 18px; text-align: center;">
+                            <img src="FOI.png" alt="Foodbank of Indonesia Logo" style="display: block; max-width: 270px; width: 100%; height: auto; margin: 0 auto 8px auto; object-fit: contain;">
+                            <strong style="display: block; font-size: 14px;">Foodbank of Indonesia</strong>
+                            <small class="sub" style="font-size: 11px;">Mendorong Kemakmuran, Memerangi Kelaparan</small>
+                        </div>
+
+                        <div class="panel" style="padding: 16px; background: #f8fafc;">
+                            <div style="margin-bottom: 10px;">
+                                <small class="sub" style="display: block; font-size: 10px;">DEADLINE</small>
+                                <strong style="font-size: 13px;">Oct 30, 2026</strong>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <small class="sub" style="display: block; font-size: 10px;">REQUIRED SKILLS</small>
+                                <strong style="font-size: 12px;">UX Research, Interviewing, Data Analysis</strong>
+                            </div>
+                            <div>
+                                <small class="sub" style="display: block; font-size: 10px;">TEAM</small>
+                                <strong style="font-size: 12px;">5 Volunteers + Mentor</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= TAB 2: TASKS ================= -->
+            <div id="tab-tasks" class="tab-content">
+                <div class="panel" style="padding: 16px 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="font-size: 12px; font-weight: 700; color: var(--blue2); background: #eff6ff; padding: 4px 8px; border-radius: 4px;">WEEK 2 OF 4</span>
+                        <span class="sub" style="margin-left: 10px; font-weight: 600;">Research phase</span>
+                        <p class="sub" style="font-size: 12px; margin-top: 4px;">This week: complete interviews and synthesize patterns for current-state journey map.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span class="sub" style="font-size: 12px;">Overall progress</span>
+                        <strong style="display: block; font-size: 16px; color: var(--blue2);">38%</strong>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="font-size: 18px;">Tasks</h3>
+                        <p class="sub" style="font-size: 12px;">8 total · 3 complete · 2 in progress</p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn" onclick="notify('New task modal opened.')">+ Add task</button>
+                        <button class="btn primary" onclick="showSubmitFlow(1)">Submit Work</button>
+                    </div>
+                </div>
+
+                <div class="task-board">
+                    <!-- TO DO -->
+                    <div class="task-col">
+                        <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 12px;">
+                            <span>To do</span>
+                            <span style="background: #e2e8f0; padding: 2px 8px; border-radius: 12px; font-size: 11px;">3</span>
+                        </div>
+                        <div class="task-item" onclick="notify('Viewing task details...')">
+                            <strong>Recruit interview participants</strong>
+                            <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 11px; color: var(--muted);">
+                                <span>📅 Due Oct 2</span>
+                                <span style="background:#e0e7ff; color:#3730a3; padding:2px 6px; border-radius:50%;">MC</span>
+                            </div>
+                        </div>
+                        <div class="task-item" onclick="notify('Viewing task details...')">
+                            <strong>Draft interview guide</strong>
+                            <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 11px; color: var(--muted);">
+                                <span>📅 Due Oct 3</span>
+                                <span style="background:#e0e7ff; color:#3730a3; padding:2px 6px; border-radius:50%;">MC</span>
+                            </div>
+                        </div>
+                        <button class="btn-add-task" onclick="notify('Add task to To Do')">+ Add a task</button>
+                    </div>
+
+                    <!-- IN PROGRESS -->
+                    <div class="task-col">
+                        <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 12px;">
+                            <span>In progress</span>
+                            <span style="background: #fef08a; color: #854d0e; padding: 2px 8px; border-radius: 12px; font-size: 11px;">2</span>
+                        </div>
+                        <div class="task-item" onclick="notify('Viewing task details...')">
+                            <strong>Review volunteer intake data</strong>
+                            <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 11px; color: #b45309;">
+                                <span>📅 Due today</span>
+                                <span style="background:#fef3c7; color:#92400e; padding:2px 6px; border-radius:50%;">MC</span>
+                            </div>
+                        </div>
+                        <div class="task-item" onclick="notify('Viewing task details...')">
+                            <strong>Confirm research questions</strong>
+                            <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 11px; color: var(--muted);">
+                                <span>Mentor review</span>
+                                <span style="background:#e0e7ff; color:#3730a3; padding:2px 6px; border-radius:50%;">JL</span>
+                            </div>
+                        </div>
+                        <button class="btn-add-task" onclick="notify('Add task to In Progress')">+ Add a task</button>
+                    </div>
+
+                    <!-- DONE -->
+                    <div class="task-col">
+                        <div style="display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 12px;">
+                            <span>Done</span>
+                            <span style="background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 12px; font-size: 11px;">3</span>
+                        </div>
+                        <div class="task-item" onclick="notify('Task completed!')">
+                            <strong>Attend project kickoff</strong>
+                            <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 11px; color: #166534;">
+                                <span>✓ Completed Sep 29</span>
+                                <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:50%;">MC</span>
+                            </div>
+                        </div>
+                        <div class="task-item" onclick="notify('Task completed!')">
+                            <strong>Read existing research</strong>
+                            <div style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 11px; color: #166534;">
+                                <span>✓ Completed Sep 30</span>
+                                <span style="background:#dcfce7; color:#166534; padding:2px 6px; border-radius:50%;">MC</span>
+                            </div>
+                        </div>
+                        <button class="btn-add-task" onclick="notify('Add task to Done')">+ Add a task</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= TAB 3: RESOURCES ================= -->
+            <div id="tab-resources" class="tab-content">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="panel" style="padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                            <strong>Resources</strong>
+                            <button class="text-btn" onclick="notify('Viewing all resources...')">View all</button>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <div style="display: flex; gap: 12px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 8px;">
+                                <span style="font-size: 20px;">📄</span>
+                                <div>
+                                    <strong style="display: block; font-size: 13px;">Project brief.pdf</strong>
+                                    <small class="sub">Partner file · 2.4 MB</small>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 8px;">
+                                <span style="font-size: 20px;">📊</span>
+                                <div>
+                                    <strong style="display: block; font-size: 13px;">Volunteer intake data</strong>
+                                    <small class="sub">Spreadsheet · View only</small>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 8px;">
+                                <span style="font-size: 20px;">📘</span>
+                                <div>
+                                    <strong style="display: block; font-size: 13px;">Interview guide template</strong>
+                                    <small class="sub">Mentor resource</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel" style="padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                            <strong>Zoom Recordings</strong>
+                            <button class="text-btn" onclick="notify('Viewing all recordings...')">View all</button>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <div style="display: flex; gap: 12px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 8px;">
+                                <span style="font-size: 20px;">🎥</span>
+                                <div>
+                                    <strong style="display: block; font-size: 13px;">Zoom Mentorship</strong>
+                                    <small class="sub">MP4 · 3 GB</small>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 8px;">
+                                <span style="font-size: 20px;">🎥</span>
+                                <div>
+                                    <strong style="display: block; font-size: 13px;">Meeting</strong>
+                                    <small class="sub">Youtube · Unlisted</small>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: 8px;">
+                                <span style="font-size: 20px;">🎥</span>
+                                <div>
+                                    <strong style="display: block; font-size: 13px;">Brainstorming</strong>
+                                    <small class="sub">MP4 · 3.5 GB</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= TAB 4: PROGRESS ================= -->
+            <div id="tab-progress" class="tab-content">
+                <div class="panel" style="padding: 24px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="font-size: 20px;">Your Progress</h3>
+                        <p class="sub">Map a food bank volunteer journey · Harbor Community Food Hub</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <div style="width: 64px; height: 64px; border-radius: 50%; background: conic-gradient(var(--blue2) 33%, #e2e8f0 0); display: grid; place-items: center;">
+                            <div style="width: 50px; height: 50px; background: #fff; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 13px;">33%</div>
+                        </div>
+                        <div>
+                            <strong style="font-size: 18px; display: block;">2 of 6</strong>
+                            <small class="sub">Steps Completed</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div class="panel" style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 16px; align-items: center;">
+                            <span style="width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0; display: grid; place-items: center; font-weight: 700;">1</span>
+                            <div>
+                                <strong>Attend project kickoff</strong>
+                                <p class="sub" style="font-size: 12px;">Meet the team and learn about the project goals, timeline, and expectations.</p>
+                            </div>
+                        </div>
+                        <span style="background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 12px;">COMPLETED</span>
+                    </div>
+
+                    <div class="panel" style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 16px; align-items: center;">
+                            <span style="width: 32px; height: 32px; border-radius: 50%; background: #e2e8f0; display: grid; place-items: center; font-weight: 700;">2</span>
+                            <div>
+                                <strong>Read Existing Research</strong>
+                                <p class="sub" style="font-size: 12px;">Review previous research to understand the community's needs and existing food bank challenges.</p>
+                            </div>
+                        </div>
+                        <span style="background: #dcfce7; color: #15803d; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 12px;">COMPLETED</span>
+                    </div>
+
+                    <div class="panel" style="padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; border-color: #fde047;">
+                        <div style="display: flex; gap: 16px; align-items: center;">
+                            <span style="width: 32px; height: 32px; border-radius: 50%; background: #fef08a; color: #854d0e; display: grid; place-items: center; font-weight: 700;">3</span>
+                            <div>
+                                <strong>Review volunteer intake data</strong>
+                                <p class="sub" style="font-size: 12px;">Analyze volunteer responses to identify key needs, motivations, and availability.</p>
+                            </div>
+                        </div>
+                        <span style="background: #fef08a; color: #854d0e; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 12px;">IN PROGRESS</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= TAB 5: COMMUNICATION ================= -->
+            <div id="tab-communication" class="tab-content">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="panel" style="padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                            <strong>Mentor</strong>
+                            <span style="background: #e0ebff; color: #3038d8; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px;">2 NEW</span>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
+                            <div style="display: flex; gap: 12px;">
+                                <div class="avatar">J</div>
+                                <div>
+                                    <strong>Jordan Lee</strong> <small class="sub">· 12 min</small>
+                                    <p class="sub" style="font-size: 13px; margin-top: 2px;">I added comments to your interview guide.</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px;">
+                                <div class="avatar">A</div>
+                                <div>
+                                    <strong>Ana Rivera</strong> <small class="sub">· 1 hr</small>
+                                    <p class="sub" style="font-size: 13px; margin-top: 2px;">The volunteer list is ready for outreach.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn" style="width: 100%;" onclick="notify('Opening mentor chat...')">Open messages</button>
+                    </div>
+
+                    <div class="panel" style="padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 16px;">
+                            <strong>Group</strong>
+                            <span style="background: #e0ebff; color: #3038d8; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px;">6 NEW</span>
+                        </div>
+                        <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                            <div class="avatar">G</div>
+                            <div>
+                                <strong>Group Design</strong> <small class="sub">· 30 min</small>
+                                <p class="sub" style="font-size: 13px; margin-top: 2px;">Lulu: I've done my part</p>
+                            </div>
+                        </div>
+                        <button class="btn" style="width: 100%;" onclick="notify('Opening group chat...')">Open messages</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SUBMIT WORK FLOW (STEPPER CONTAINER) ================= -->
+            <div id="submit-flow-container" class="hidden">
+                <div class="stepper-bar">
+                    <div class="step-circle active" id="step-c1">1</div>
+                    <span id="step-t1">Submit</span>
+                    <div class="step-line" id="step-l1"></div>
+                    <div class="step-circle" id="step-c2">2</div>
+                    <span id="step-t2" style="color: var(--muted);">Review & feedback</span>
+                    <div class="step-line" id="step-l2"></div>
+                    <div class="step-circle" id="step-c3">3</div>
+                    <span id="step-t3" style="color: var(--muted);">Complete</span>
+                </div>
+
+                <!-- STEP 1: SUBMIT WORK -->
+                <div id="flow-step-1" class="flow-step">
+                    <div class="panel" style="padding: 20px; margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3 style="font-size: 18px;">Final journey map and recommendations</h3>
+                                <p class="sub" style="font-size: 12px; margin-top: 4px;">Submitted Oct 24 at 4:18 PM · Version 2</p>
+                            </div>
+                            <span style="background: #fef08a; color: #854d0e; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 12px;">IN REVIEW</span>
+                        </div>
+                        <div style="background: #fefce8; border: 1px solid #fef08a; border-radius: 8px; padding: 10px 14px; margin-top: 14px; font-size: 12px; color: #854d0e;">
+                            ⏳ Partner review expected by Monday, Oct 28.
+                        </div>
+                    </div>
+
+                    <div class="panel" style="padding: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <strong>Submitted files</strong>
+                            <button class="btn" onclick="notify('File upload dialog opened.')">+ Add file</button>
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 8px;">
+                                <div>
+                                    <strong style="display: block; font-size: 13px;">Volunteer Journey Map.pdf</strong>
+                                    <small class="sub">8.4 MB · Final deliverable</small>
+                                </div>
+                                <button class="text-btn" onclick="notify('File options...')">•••</button>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 8px;">
+                                <div>
+                                    <strong style="display: block; font-size: 13px;">Research Findings & Recommendations.pdf</strong>
+                                    <small class="sub">5.1 MB · Presentation</small>
+                                </div>
+                                <button class="text-btn" onclick="notify('File options...')">•••</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: right; margin-top: 20px;">
+                        <button class="btn primary" onclick="showSubmitFlow(2)">Next: Review & Feedback →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: REVIEW & FEEDBACK -->
+                <div id="flow-step-2" class="flow-step hidden">
+                    <div class="panel" style="padding: 20px; margin-bottom: 20px;">
+                        <h3 style="font-size: 16px; margin-bottom: 16px;">Review & feedback</h3>
+                        <div style="display: flex; flex-direction: column; gap: 16px;">
+                            <div style="display: flex; gap: 12px;">
+                                <div class="avatar">J</div>
+                                <div>
+                                    <strong>Jordan Lee · Mentor</strong> <small class="sub">· Today, 10:42 AM</small>
+                                    <p class="sub" style="font-size: 13px; color: var(--ink); margin-top: 4px;">Strong synthesis. The participant quotes make the pain points easy to trust. Before final approval, tighten the link between insight 2 and recommendation 3.</p>
+                                    <button class="text-btn" style="margin-top: 4px;" onclick="notify('Reply box opened')">Reply</button>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 12px;">
+                                <div class="avatar">A</div>
+                                <div>
+                                    <strong>Ana Rivera · Partner</strong> <small class="sub">· Yesterday, 4:05 PM</small>
+                                    <p class="sub" style="font-size: 13px; color: var(--ink); margin-top: 4px;">The team reviewed the journey map and recognizes the experience. Could you add one low-effort quick win for next month?</p>
+                                    <button class="text-btn" style="margin-top: 4px;" onclick="notify('Reply box opened')">Reply</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel" style="padding: 20px;">
+                        <h4 style="font-size: 14px; margin-bottom: 12px;">Review checklist</h4>
+                        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+                            <div><span style="color: #16a34a;">✓</span> Project requirements met</div>
+                            <div><span style="color: #16a34a;">✓</span> Mentor feedback addressed</div>
+                            <div><span style="color: var(--muted);">○</span> Partner approval</div>
+                            <div><span style="color: var(--muted);">○</span> Skills verified</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right; margin-top: 20px;">
+                        <button class="btn" onclick="showSubmitFlow(1)" style="margin-right: 10px;">← Back</button>
+                        <button class="btn primary" onclick="showSubmitFlow(3)">Next: Final Approval →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: EXPERIENCE VERIFIED / COMPLETE -->
+                <div id="flow-step-3" class="flow-step hidden">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <div>
+                            <h2 style="font-size: 24px; font-weight: 800;">Experience verified</h2>
+                            <p class="sub">Your project is complete and ready to become part of your story.</p>
+                        </div>
+                        <button class="btn primary" onclick="notify('Project added to portfolio!')">+ Add to portfolio</button>
+                    </div>
+
+                    <div class="panel" style="padding: 20px; background: #eff6ff; border-color: #bfdbfe; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; gap: 14px; align-items: center;">
+                            <span style="font-size: 24px;">🎉</span>
+                            <div>
+                                <strong style="font-size: 16px; color: #1e3a8a; display: block;">Project completed—well done, John!</strong>
+                                <p class="sub" style="color: #1e40af; font-size: 12px;">Harbor Community Food Hub and your mentor approved the final work on October 28.</p>
+                            </div>
+                        </div>
+                        <span style="background: #2563eb; color: #fff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 12px;">VERIFIED EXPERIENCE</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+                        <!-- CERTIFICATE PREVIEW -->
+                        <div class="panel" style="padding: 24px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                <strong>Certificate of verified experience</strong>
+                                <div style="display: flex; gap: 8px;">
+                                    <button class="btn" onclick="notify('Downloading certificate...')">📥 Download</button>
+                                    <button class="btn" onclick="notify('Share link copied!')">🔗 Share</button>
+                                </div>
+                            </div>
+                            <div style="border: 2px dashed var(--line); border-radius: 12px; padding: 60px 20px; text-align: center; background: #fafafa;">
+                                <div style="font-size: 28px; font-weight: 800; color: var(--blue2); margin-bottom: 8px;">karyä</div>
+                                <strong>CERTIFICATE OF COMPLETION</strong>
+                                <p class="sub" style="margin-top: 8px;">Awarded to John Doe for successfully completing the UX Research Micro-internship.</p>
+                            </div>
+                        </div>
+
+                        <!-- VERIFIED SKILLS -->
+                        <div class="panel" style="padding: 20px;">
+                            <h4 style="font-size: 14px; margin-bottom: 12px;">Verified skills</h4>
+                            <p class="sub" style="font-size: 11px; margin-bottom: 16px;">Verified by mentor and partner</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px;">
+                                <span class="tag">✓ User interviews</span>
+                                <span class="tag">✓ Journey mapping</span>
+                                <span class="tag">✓ Qualitative synthesis</span>
+                                <span class="tag">✓ Stakeholder communication</span>
+                                <span class="tag">✓ Service recommendations</span>
+                            </div>
+                            <p class="sub" style="font-size: 11px;">These skills can be displayed on your public portfolio and shared profile.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function notify(message) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.style.display = "block";
+    setTimeout(() => { toast.style.display = "none"; }, 2400);
+}
+
+function switchSubTab(tabName) {
+    document.getElementById("submit-flow-container").classList.add("hidden");
+    document.getElementById("main-workspace-tabs").style.display = "flex";
+
+    const buttons = document.querySelectorAll("#main-workspace-tabs .tab-btn");
+    buttons.forEach(btn => btn.classList.remove("active"));
+    
+    document.querySelectorAll(".tab-content").forEach(tc => tc.classList.remove("active"));
+
+    const targetContent = document.getElementById("tab-" + tabName);
+    if (targetContent) targetContent.classList.add("active");
+
+    event.target.classList.add("active");
+}
+
+function showSubmitFlow(stepNumber) {
+    document.querySelectorAll(".tab-content").forEach(tc => tc.classList.remove("active"));
+    document.getElementById("submit-flow-container").classList.remove("hidden");
+
+    document.querySelectorAll(".flow-step").forEach(fs => fs.classList.add("hidden"));
+
+    document.getElementById("flow-step-" + stepNumber).classList.remove("hidden");
+
+    for (let i = 1; i <= 3; i++) {
+        const circle = document.getElementById("step-c" + i);
+        const line = document.getElementById("step-l" + i);
+        
+        if (circle) {
+            if (i <= stepNumber) {
+                circle.classList.add("active");
+            } else {
+                circle.classList.remove("active");
+            }
+        }
+        if (line) {
+            if (i < stepNumber) {
+                line.classList.add("active");
+            } else {
+                line.classList.remove("active");
+            }
+        }
+    }
+}
+</script>
+
+</body>
+</html>

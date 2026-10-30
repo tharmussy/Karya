@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Karya</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+    <!-- SIDEBAR UNIVERSAL -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Karya Logo">
+            </a>
+        </div>
+
+        <p class="group-label">Main</p>
+
+       <nav class="nav">
+            <a href="index.html" class="side-item">
+                <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        Home
+            </a>
+            <a href="exploreprojects.html" class="side-item">
+                <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        Explore projects
+            </a>
+        <a href="applications.html" class="side-item">
+                <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        Applications
+        </a>
+        <a href="workspace.html" class="side-item">
+                <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Workspace
+        </a>
+        <a href="portfolio.html" class="side-item active">
+                <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        Portfolio
+        </a>
+        </nav>
+
+        <p class="group-label" style="margin-top:10px">Communication</p>
+
+        <nav class="nav">
+            <a href="inbox.html" class="side-item">
+                <span class="ico">✉</span>Inbox
+            </a>
+            <a href="feedback.html" class="side-item">
+                <span class="ico">☑</span>Feedback
+            </a>
+        </nav>
+
+        <div class="side-bottom">
+            <nav class="nav">
+                <a href="profile.html" class="side-item">
+                    <span class="ico">⚙</span>Settings
+                </a>
+                <button type="button" onclick="notify('Help center is a demo item.')">
+                    <span class="ico">ⓘ</span>Help
+                </button>
+            </nav>
+
+            <div class="user">
+                <div class="avatar">●</div>
+                <div>
+                    <b>Full Name</b>
+                    <small>JohnDoe@gmail.com</small>
+                </div>
+                <span class="logout" onclick="window.location.href='signin.html'" title="Log out">
+                    <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                </span>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <section class="page active">
+            <div class="page-head">
+                <div>
+                    <h1>My portfolio</h1>
+                    <p class="sub">Build a clear story from your verified project experience.</p>
+                </div>
+                <button class="btn primary" onclick="notify('Portfolio link copied to clipboard!')">🔗 Share portfolio</button>
+            </div>
+
+            <div class="panel" style="padding:16px 20px; margin-bottom:24px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; gap:12px; align-items:center;">
+                    <span style="background:#dcfce7; color:#15803d; font-size:11px; font-weight:700; padding:3px 8px; border-radius:4px;">PUBLIC</span>
+                    <span class="sub" style="font-size:13px;">projectpath.com/maya-chen</span>
+                </div>
+                <div style="display:flex; gap:12px; align-items:center;">
+                    <small class="sub">Last published 2 minutes ago</small>
+                    <button class="btn" onclick="notify('Link copied!')">📋 Copy link</button>
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:320px 1fr; gap:24px; align-items:start;">
+                <!-- LEFT COLUMN: PROJECTS -->
+                <div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                        <strong>Projects</strong>
+                        <button class="text-btn" onclick="notify('Add project clicked')" style="background:none; border:none; color:var(--blue2); cursor:pointer;">+ Add project</button>
+                    </div>
+
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <div class="panel" style="padding:14px; border-color:var(--blue2); background:#eff6ff;">
+                            <strong style="font-size:13px; display:block;">Map a food bank volunteer journey</strong>
+                            <div style="display:flex; gap:6px; margin-top:6px;">
+                                <span style="background:#bfdbfe; color:#1e40af; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;">Published</span>
+                                <span style="background:#dcfce7; color:#15803d; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;">VERIFIED</span>
+                            </div>
+                        </div>
+
+                        <div class="panel" style="padding:14px;">
+                            <strong style="font-size:13px; display:block;">Redesign the donor thank-you journey</strong>
+                            <div style="display:flex; gap:6px; margin-top:6px;">
+                                <span style="background:#e2e8f0; color:#475569; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;">Draft</span>
+                                <span style="background:#dcfce7; color:#15803d; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;">VERIFIED</span>
+                            </div>
+                        </div>
+
+                        <div class="panel" style="padding:14px;">
+                            <strong style="font-size:13px; display:block;">Campus wayfinding concept</strong>
+                            <div style="display:flex; gap:6px; margin-top:6px;">
+                                <span style="background:#f3f4f6; color:#9ca3af; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;">Hidden</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel" style="padding:16px; margin-top:20px; text-align:center;">
+                        <strong style="display:block; font-size:13px; margin-bottom:8px;">Portfolio Builder</strong>
+                        <button class="btn" style="border-color:#3b82f6; color:#1d4ed8; font-size:12px;" onclick="notify('Upgraded to Karya+')">Upgrade to Karya+</button>
+                    </div>
+                </div>
+
+                <!-- RIGHT COLUMN: PREVIEW CARD -->
+                <div class="panel" style="padding:32px; background:#fdfbf7; text-align:center;">
+                    <div style="max-width:400px; margin:0 auto;">
+                        <h2 style="font-size:32px; font-weight:800; color:#292524; letter-spacing:-1px;">DIGITAL DESIGNER</h2>
+                        <p class="sub" style="font-size:12px; margin:12px 0 24px;">I create beautiful, functional and user friendly digital experiences.</p>
+                        
+                        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:24px;">
+                            <div style="background:#fff; padding:10px; border-radius:8px; border:1px solid #e7e5e4;">
+                                <strong style="font-size:16px; display:block;">5+</strong>
+                                <small style="font-size:9px; color:var(--muted);">YEARS EXP</small>
+                            </div>
+                            <div style="background:#fff; padding:10px; border-radius:8px; border:1px solid #e7e5e4;">
+                                <strong style="font-size:16px; display:block;">35+</strong>
+                                <small style="font-size:9px; color:var(--muted);">PROJECTS</small>
+                            </div>
+                            <div style="background:#fff; padding:10px; border-radius:8px; border:1px solid #e7e5e4;">
+                                <strong style="font-size:16px; display:block;">20+</strong>
+                                <small style="font-size:9px; color:var(--muted);">CLIENTS</small>
+                            </div>
+                            <div style="background:#fff; padding:10px; border-radius:8px; border:1px solid #e7e5e4;">
+                                <strong style="font-size:16px; display:block;">10+</strong>
+                                <small style="font-size:9px; color:var(--muted);">AWARDS</small>
+                            </div>
+                        </div>
+
+                        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px;">
+                            <div style="background:#fff; padding:12px; border-radius:8px; text-align:left; border:1px solid #e7e5e4;">
+                                <strong style="font-size:11px; display:block;">UI/UX DESIGN</strong>
+                                <small style="font-size:9px; color:var(--muted);">Crafting intuitive interfaces</small>
+                            </div>
+                            <div style="background:#fff; padding:12px; border-radius:8px; text-align:left; border:1px solid #e7e5e4;">
+                                <strong style="font-size:11px; display:block;">WEB DESIGN</strong>
+                                <small style="font-size:9px; color:var(--muted);">Designing responsive sites</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+function notify(msg) {
+    const t = document.getElementById("toast"); t.textContent = msg; t.style.display = "block";
+    setTimeout(() => { t.style.display = "none"; }, 2400);
+}
+</script>
+</body>
+</html>

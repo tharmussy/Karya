@@ -15,64 +15,70 @@
 
 <div class="app">
 
-  <!-- SIDEBAR (STANDAR SERAGAM) -->
+  <!-- SIDEBAR UNIVERSAL -->
   <aside class="sidebar">
-    <div class="logo">
-      <a href="index.html">
-        <img src="logo.png" alt="Karya Logo">
-      </a>
-    </div>
+      <div class="logo">
+          <a href="index.html">
+              <img src="logo.png" alt="Karya Logo">
+          </a>
+      </div>
 
-    <p class="group-label">Main</p>
+      <p class="group-label">Main</p>
 
-    <nav class="nav">
-      <a href="index.html" class="side-item active">
-        <span class="ico">⌂</span>Home
-      </a>
-      <a href="exploreprojects.html" class="side-item">
-        <span class="ico">⌕</span>Explore projects
-      </a>
-      <a href="applications.html" class="side-item">
-        <span class="ico">▤</span>Applications
-      </a>
-      <a href="#" class="side-item">
-        <span class="ico">◫</span>Workspace
-      </a>
-      <a href="#" class="side-item">
-        <span class="ico">♧</span>Portfolio
-      </a>
-    </nav>
-
-    <p class="group-label" style="margin-top:10px">Communication</p>
-
-    <nav class="nav">
-      <button type="button" onclick="notify('Inbox is a demo item.')">
-        <span class="ico">✉</span>Inbox
-      </button>
-      <button type="button" onclick="notify('Feedback is a demo item.')">
-        <span class="ico">☑</span>Feedback
-      </button>
-    </nav>
-
-    <div class="side-bottom">
       <nav class="nav">
-        <button type="button" onclick="notify('Settings are not connected in this demo.')">
-          <span class="ico">⚙</span>Settings
-        </button>
-        <button type="button" onclick="notify('Help center is a demo item.')">
-          <span class="ico">ⓘ</span>Help
-        </button>
+    <a href="index.html" class="side-item active">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        Home
+    </a>
+    <a href="exploreprojects.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        Explore projects
+    </a>
+    <a href="applications.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        Applications
+    </a>
+    <a href="workspace.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Workspace
+    </a>
+    <a href="portfolio.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        Portfolio
+    </a>
+</nav>
+
+      <p class="group-label" style="margin-top:10px">Communication</p>
+
+      <nav class="nav">
+          <a href="inbox.html" class="side-item">
+              <span class="ico">✉</span>Inbox
+          </a>
+          <a href="feedback.html" class="side-item">
+              <span class="ico">☑</span>Feedback
+          </a>
       </nav>
 
-      <div class="user">
-        <div class="avatar">●</div>
-        <div>
-          <b>Full Name</b>
-          <small>JohnDoe@gmail.com</small>
-        </div>
-        <span class="logout">⇥</span>
+      <div class="side-bottom">
+          <nav class="nav">
+              <a href="profile.html" class="side-item">
+                  <span class="ico">⚙</span>Settings
+              </a>
+              <button type="button" onclick="notify('Help center is a demo item.')">
+                  <span class="ico">ⓘ</span>Help
+              </button>
+          </nav>
+
+          <div class="user">
+              <div class="avatar">●</div>
+              <div>
+                  <b>Full Name</b>
+                  <small>JohnDoe@gmail.com</small>
+              </div>
+              <span class="logout" onclick="window.location.href='signin.html'" title="Log out">
+                    <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                </span>
       </div>
-    </div>
   </aside>
 
   <!-- MAIN CONTENT (DASHBOARD) -->
@@ -86,33 +92,56 @@
           <p class="sub">Here's progress and what you can do next</p>
         </div>
         <div style="display: flex; gap: 12px;">
-          <button class="btn" style="border-color: #3b82f6; color: #1e40af; font-weight: 600;">Upgrade to Karya+</button>
-          <a href="exploreprojects.html" class="btn primary">🔍 Explore Projects</a>
+          <button class="btn" style="border-color: #3b82f6; color: #1e40af; font-weight: 600;" onclick="notify('Upgraded to Karya+')">Upgrade to Karya+</button>
+            <a href="exploreprojects.html" class="btn primary" style="display: inline-flex; align-items: center; gap: 8px; line-height: 1;">
+              <svg class="ico-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <span style="position: relative; top: -1px;">Explore Projects</span>
+            </a>
         </div>
       </div>
 
       <!-- STAT CARDS -->
       <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 30px;">
-        <div class="panel" style="padding: 20px;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted);">Active project <span>📁</span></div>
-          <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">1</div>
-          <small class="sub">Next task due Monday</small>
+    <!-- Card 1: Active Project -->
+    <div class="panel" style="padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--muted);">
+            Active project 
+            <svg class="ico-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
         </div>
-        <div class="panel" style="padding: 20px;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted);">Applications <span>📋</span></div>
-          <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">1</div>
-          <small class="sub">Update last week</small>
+        <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">1</div>
+        <small class="sub">Next task due Monday</small>
+    </div>
+
+    <!-- Card 2: Applications -->
+    <div class="panel" style="padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--muted);">
+            Applications 
+            <svg class="ico-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
         </div>
-        <div class="panel" style="padding: 20px;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted);">Verified Skills <span>✔️</span></div>
-          <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">3</div>
-          <small class="sub">+1 this week</small>
+        <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">1</div>
+        <small class="sub">Update last week</small>
+    </div>
+
+    <!-- Card 3: Verified Skills -->
+    <div class="panel" style="padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--muted);">
+            Verified Skills 
+            <svg class="ico-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         </div>
-        <div class="panel" style="padding: 20px;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted);">Task Completed <span>👁️</span></div>
-          <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">2</div>
+        <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">3</div>
+        <small class="sub">+1 this week</small>
+    </div>
+
+    <!-- Card 4: Task Completed -->
+    <div class="panel" style="padding: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--muted);">
+            Task Completed 
+            <svg class="ico-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
         </div>
-      </div>
+        <div style="font-size: 2rem; font-weight: bold; margin: 12px 0 6px; color: var(--ink);">2</div>
+        <small class="sub">All systems nominal</small>
+    </div>
+</div>
 
       <!-- BOTTOM LAYOUT SPLIT -->
       <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
@@ -133,13 +162,15 @@
 
           <div style="background: #fefce8; border: 1px solid #fef08a; border-radius: 10px; padding: 16px; display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
             <div style="display: flex; gap: 12px; align-items: center;">
-              <span style="background: #fef08a; padding: 10px; border-radius: 8px;">📋</span>
+              <span style="background: #fef08a; padding: 10px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center;">
+    <svg class="ico-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+</span>
               <div>
                 <small class="sub" style="display: block; font-size: 0.75rem;">NEXT TASK &bull; DUE OCT 2</small>
                 <strong style="color: var(--ink);">Synthesize interview themes</strong>
               </div>
             </div>
-            <button class="btn" style="background: #ffffff; color: #0b0c4c; border-color: #0b0c4c; font-weight: 600;">Open workspace</button>
+            <a href="workspace.html" class="btn" style="background: #ffffff; color: #0b0c4c; border-color: #0b0c4c; font-weight: 600;">Open workspace</a>
           </div>
         </div>
 

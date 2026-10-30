@@ -15,65 +15,72 @@
 <body>
 <div class="app">
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
-    <div class="logo">
-        <a href="index.html">
-            <img src="logo.png" alt="Karya Logo">
-        </a>
-    </div>
+    <!-- SIDEBAR UNIVERSAL -->
+    <aside class="sidebar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="logo.png" alt="Karya Logo">
+            </a>
+        </div>
 
-    <p class="group-label">Main</p>
+        <p class="group-label">Main</p>
 
-    <nav class="nav">
-        <a href="index.html" class="side-item">
-            <span class="ico">⌂</span>Home
-        </a>
-        <button class="active" onclick="showPage('explore')">
-            <span class="ico">⌕</span>Explore projects
-        </button>
-        <a href="applications.html" class="side-item">
-            <span class="ico">▤</span>Applications
-        </a>
-        <button onclick="showPage('details')">
-            <span class="ico">◫</span>Workspace
-        </button>
-        <button onclick="showPage('details')">
-            <span class="ico">♧</span>Portfolio
-        </button>
-    </nav>
-
-    <p class="group-label" style="margin-top:10px">Communication</p>
-
-    <nav class="nav">
-        <button onclick="notify('Inbox is a demo item.')">
-            <span class="ico">✉</span>Inbox
-        </button>
-        <button onclick="notify('Feedback is a demo item.')">
-            <span class="ico">☑</span>Feedback
-        </button>
-    </nav>
-
-    <div class="side-bottom">
         <nav class="nav">
-            <button onclick="notify('Settings are not connected in this demo.')">
-                <span class="ico">⚙</span>Settings
-            </button>
-            <button onclick="notify('Help center is a demo item.')">
-                <span class="ico">ⓘ</span>Help
-            </button>
+    <a href="index.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        Home
+    </a>
+    <a href="exploreprojects.html" class="side-item active">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        Explore projects
+    </a>
+    <a href="applications.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        Applications
+    </a>
+    <a href="workspace.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Workspace
+    </a>
+    <a href="portfolio.html" class="side-item">
+        <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        Portfolio
+    </a>
+</nav>
+
+        <p class="group-label" style="margin-top:10px">Communication</p>
+
+        <nav class="nav">
+            <a href="inbox.html" class="side-item">
+                <span class="ico">✉</span>Inbox
+            </a>
+            <a href="feedback.html" class="side-item">
+                <span class="ico">☑</span>Feedback
+            </a>
         </nav>
 
-        <div class="user">
-            <div class="avatar">●</div>
-            <div>
-                <b>Full Name</b>
-                <small>JohnDoe@gmail.com</small>
+        <div class="side-bottom">
+            <nav class="nav">
+                <a href="profile.html" class="side-item">
+                    <span class="ico">⚙</span>Settings
+                </a>
+                <button type="button" onclick="notify('Help center is a demo item.')">
+                    <span class="ico">ⓘ</span>Help
+                </button>
+            </nav>
+
+            <div class="user">
+                <div class="avatar">●</div>
+                <div>
+                    <b>Full Name</b>
+                    <small>JohnDoe@gmail.com</small>
+                </div>
+                <span class="logout" onclick="window.location.href='signin.html'" title="Log out">
+                    <svg class="ico-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                </span>
             </div>
-            <span class="logout">⇥</span>
         </div>
-    </div>
-</aside>
+    </aside>
 
 <main>
 
@@ -86,8 +93,9 @@
             <p class="sub">Find a project that fits your goals, skills, and schedule.</p>
         </div>
 
-        <button id="saved-projects-btn" class="btn" onclick="showSaved()">
-            □ &nbsp; Saved projects · <span id="saved-count">0</span>
+        <button id="saved-projects-btn" class="btn" onclick="showSaved()" style="display: flex; align-items: center; gap: 8px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Saved projects · <span id="saved-count">0</span>
         </button>
     </div>
 
@@ -117,7 +125,7 @@
 
     <div class="catalog">
 
-        <!-- FILTERS (FIXED POSITION, STAY DI TEMPAT) -->
+        <!-- FILTERS -->
         <aside class="filter-panel collapsed" id="filter-panel">
             <div class="filter-top">
                 <button
@@ -127,7 +135,6 @@
                     aria-expanded="false"
                 >
                     <h3>Filters</h3>
-                    <!-- Pakai HTML Entity panah bawah standar, nanti di-toggle via JS -->
                     <span id="filter-chevron">&#9662;</span>
                 </button>
             </div>
@@ -168,7 +175,6 @@
                 <span id="filter-summary">All projects · No filters applied</span>
             </div>
 
-            <!-- GRID CONTAINER 3 CARDS PER ROW -->
             <div id="project-grid" class="project-grid"></div>
 
             <div class="pagination">
@@ -214,7 +220,7 @@
     </div>
     <form id="application-form" class="panel" style="padding:20px;" onsubmit="submitApplication(event)">
         <h3>Your interest statement</h3>
-        <textarea class="form-control" id="interest" style="margin:10px 0;" required></textarea>
+        <textarea class="form-control" id="interest" style="margin:10px 0; width:100%; height:100px;" required></textarea>
         <button type="submit" class="btn primary">Submit Application</button>
         <button type="button" class="btn" onclick="showPage('details')" style="margin-left:10px;">Back</button>
     </form>
@@ -226,7 +232,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// Data dummy lengkap 9 proyek supaya 6 card pertama langsung tampil penuh (3x2 grid)
 const projects = [
     { id: 1, badge: "94% match", tone: "green", title: "Map a food bank volunteer journey", org: "Harbor Community Food Hub", category: "UX & product", discipline: "UX research", tags: ["Interviews", "Journey maps"], skills: ["User research", "Figma"], weeks: 4, level: "Developing" },
     { id: 2, badge: "91% match", tone: "green", title: "Design a climate action microsite", org: "Clean Coast Collective", category: "UX & product", discipline: "Web design", tags: ["Figma", "Content design"], skills: ["Figma", "Content design"], weeks: 3, level: "Developing" },
@@ -260,25 +265,18 @@ function toggleFilters() {
     panel.classList.toggle("collapsed", !opening);
     content.hidden = !opening;
     button.setAttribute("aria-expanded", String(opening));
-
-    // Kalau kebuka jadi panah atas (^), kalau tertutup jadi panah bawah (▾)
-    // Posisi dijamin stay di kanan card tanpa geser-geser
     chevron.innerHTML = opening ? "&#9652;" : "&#9662;";
 }
 
 function clearFilters() {
-    // Mengubah semua checkbox filter menjadi tidak tercentang (uncheck)
     document.querySelectorAll(".filter").forEach(checkbox => {
         checkbox.checked = false;
     });
 
-    // Mengosongkan kolom pencarian juga jika sedang terisi
     const searchInput = document.getElementById("search");
     if (searchInput) searchInput.value = "";
 
     showOnlySaved = false;
-
-    // Render ulang daftar project agar kembali seperti semula
     renderProjects();
 }
 
@@ -307,7 +305,6 @@ function renderProjects() {
         return matchesSaved && matchesSearch;
     });
 
-    // Batasi render tepat 6 card per halaman sesuai teks "Showing 1-6"
     const visibleProjects = filtered.slice(0, 6);
 
     if (visibleProjects.length) {
@@ -322,7 +319,7 @@ function renderProjects() {
                 <div class="category">◇ &nbsp; ${p.discipline}</div>
                 <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
                 <div class="project-meta"><span>${p.weeks} weeks</span><span>${p.level}</span></div>
-                <a class="card-link" href="#" onclick="showPage('details'); return false;">View project <span>→</span></a>
+                <a class="card-link" href="workspace.html">View project <span>→</span></a>
             </article>
         `).join("");
     } else {

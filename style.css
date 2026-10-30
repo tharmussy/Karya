@@ -161,19 +161,20 @@ a {
 }
 
 /* ==========================================
-   MAIN CONTENT AREA
+   MAIN CONTENT AREA (LAYOUT SEIMBANG & RAPI)
    ========================================== */
 main {
     flex: 1;
     min-width: 0;
-    padding: 54px 4vw 48px;
+    padding: 32px 36px 40px 36px; /* Atas, Kanan, Bawah, Kiri */
     background-color: var(--bg);
 }
 
 .page {
     display: none;
-    max-width: 1320px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: none; /* Hilangkan pembatas kaku biar ngikutin lebar layar dengan rapi */
+    margin-top: 50px;
 }
 
 .page.active {
@@ -185,15 +186,28 @@ main {
     justify-content: space-between;
     align-items: flex-end;
     gap: 20px;
-    margin-bottom: 25px;
+    margin-bottom: 24px;
 }
 
 .page h1 {
-    font-size: 30px;
+    font-size: 28px;
     line-height: 1.2;
     margin: 0 0 6px;
     color: #08090b;
     letter-spacing: -.6px;
+}
+
+main {
+    flex: 1;
+    min-width: 0;
+    padding: 32px 36px 40px 36px;
+    background-color: var(--bg);
+    /* Tambahan background artwork tipis (Dot Pattern + Subtle Radial Glow) */
+    background-image: 
+        radial-gradient(circle at 90% 10%, rgba(52, 87, 223, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 10% 90%, rgba(59, 130, 246, 0.03) 0%, transparent 40%),
+        radial-gradient(#e2e8f0 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 24px 24px; /* Ukuran pola titik-titiknya */
 }
 
 .sub {
@@ -206,7 +220,7 @@ main {
     border: 1px solid var(--line);
     background: #fff;
     border-radius: 8px;
-    padding: 12px 16px;
+    padding: 10px 14px;
     color: #17191d;
     font-size: 14px;
     cursor: pointer;
@@ -254,7 +268,7 @@ main {
     outline: 0;
     width: 100%;
     min-width: 0;
-    padding: 13px 0;
+    padding: 12px 0;
     background: transparent;
 }
 
@@ -296,13 +310,12 @@ main {
 
 .card, .panel {
     border: 1px solid var(--line);
-    border-radius: 13px;
+    border-radius: 12px;
     background: #fff;
-    box-shadow: 0 2px 5px #0000000a;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.02);
 }
 
-/* --- FILTER PANEL & TOGGLE (FINAL PRESISI FIGMA) --- */
-/* --- FILTER PANEL & TOGGLE (FIXED STAY DI TEMPAT) --- */
+/* --- FILTER PANEL & TOGGLE --- */
 .filter-panel {
     background: #fff;
     border: 1px solid var(--line);
@@ -675,9 +688,204 @@ main {
 .auth-foot { text-align: center; margin-top: 18px; font-size: 0.9rem; color: #64748b; }
 .auth-foot a { color: #2563eb; font-weight: 600; }
 
+/* ==========================================
+   WORKSPACE SPECIFIC STYLES
+   ========================================== */
+.workspace-tabs {
+    display: flex;
+    gap: 24px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 24px;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.15s ease;
+}
+
+.tab-btn.active {
+    color: var(--blue2);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--blue2);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Flow Stepper (Submit Work) */
+.stepper-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.step-circle {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.step-circle.active {
+    background: var(--blue2);
+    color: #fff;
+}
+
+.step-line {
+    flex: 1;
+    height: 2px;
+    background: #e2e8f0;
+}
+
+.step-line.active {
+    background: var(--blue2);
+}
+
+/* Task Board Columns */
+.task-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.task-col {
+    background: #f8fafc;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.task-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+    cursor: pointer;
+    transition: border-color 0.15s;
+}
+
+.task-item:hover {
+    border-color: var(--blue2);
+}
+
+.btn-add-task {
+    width: 0100%;
+    background: none;
+    border: 1px dashed var(--line);
+    padding: 8px;
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btn-add-task:hover {
+    background: #f1f5f9;
+    color: var(--ink);
+}
+
+
+/* --- FEEDBACK PAGE POLISH STYLES --- */
+.feedback-container {
+    max-width: 720px;
+    margin: 0 auto;
+}
+.category-chips {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.cat-chip {
+    border: 1px solid var(--line);
+    background: #fff;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.cat-chip.active, .cat-chip:hover {
+    background: #eff6ff;
+    color: var(--blue2);
+    border-color: #bfdbfe;
+}
+.stars-row {
+    display: flex;
+    gap: 10px;
+    margin: 14px 0 24px;
+}
+.feedback-star {
+    font-size: 32px;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: color 0.15s;
+}
+.feedback-star.active {
+    color: #eab308;
+}
+
+.nav .ico-svg, .btn svg, .card svg {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    stroke-width: 2px;
+    vertical-align: middle;
+}
+
+/* Efek Hover Menyala pada Tombol Logout */
+.logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #f87171; /* Warna merah awal agak soft / transparan */
+    transition: all 0.15s ease;
+}
+
+.logout:hover {
+    background: #fee2e2; /* Background merah sangat soft */
+    color: #dc2626;      /* Warna merah jadi jauh lebih pekat dan solid */
+}
+
 @media (max-width: 1100px) {
     .sidebar { width: 195px; }
-    main { padding: 50px 25px; }
+    main { padding: 26px 20px; }
     .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
@@ -686,6 +894,6 @@ main {
     .sidebar { width: 100%; min-height: 0; padding: 12px; border-right: 0; border-bottom: 1px solid var(--line); }
     .nav { flex-direction: row; overflow-x: auto; }
     .group-label, .side-bottom { display: none; }
-    main { padding: 26px 15px 36px; }
+    main { padding: 20px 15px; }
     .project-grid { grid-template-columns: 1fr; }
 }
